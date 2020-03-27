@@ -1,0 +1,87 @@
+SQL Class View 9th Jan 2004.
+View have 1 objective, view shows the data of a table to a dummy table,
+Like a user can see only specific fields of a table not the whole table
+then view is used, which shows the selected fields to the user.
+
+Like the Sales person should see only empname and address then we will
+create a view for the sales persons which will only show ename and address
+to the sales persons.
+
+If there are more then 100 SQL users having different Rights then
+
+Now we are creating view for sales persons,
+-------------------------------------------
+Syntax:
+Create view viewName
+	as {SQL Command}
+
+Code:
+Create view for_salesEmp
+	as select ename,job,hiredate 
+	from emp;
+
+Now as the view is created then how to see this by the folowing code
+
+select * from for_salesEmp;
+
+View does not have any data of its own, when it is called then it gets
+the data from that table and shows the data. If we update and delete
+then the master table will be updated.
+
+For Example updating data;
+--------------------------
+Update for_salesEmp
+	Set job='ANALYST'
+	where ename='ADAMS';
+
+You can only update the columns which are in the view like both the 
+fields shold be present in the view like above 2 fields are present in
+view, but it we write the same as this
+
+Update for_salesEmp
+	Set job='ANALYST'
+	where Sal=4000;
+This will not work because sal field is not present in the view.
+
+For Insert and Delete in the view might create a problem like in insert
+If there is a field which is not null and that field is not present in
+view then it will make a problem, like if empno is primary key then
+if we are inserting record from view there is not empno present then...
+
+So that we are creating a view for sales department which will show
+only the salesman data for salesman, and they can update delete and 
+insert salesman data only view code is
+
+Create view salesView
+	as select *
+	from emp where job='SALESMAN'
+
+Create view Dept20View
+	as select *
+    	from emp where Deptno=20
+
+by this way we can insert and delete records from this view because
+all fields are present in this view.... now we insert record
+
+insert into Dept20View (empno,ename,deptno)
+	values(1256,'ADEEL',10);
+
+Our view shows the data of Dept no 20 but we inserted data of dept10
+data, so keep this in ur mind, What ever the inserting is they will
+not be able to see the data which is not of Deptno20 thats all abt view
+
+Now to delete a view
+--------------------
+Syntax:
+Drop View ViewName;
+
+Code:
+drop view Dept20View;
+=====================
+
+
+
+
+-----------------------------------------
+Grant select,update to all;
+will let everyone read and delete records.

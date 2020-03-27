@@ -1,0 +1,13 @@
+set echo on
+DECLARE
+  v_HoursWorked Number := 50 ; --Number of hours worked by hourly employee
+  v_OverTime Number ; --Storage of Overtime Hours
+BEGIN
+  IF v_HoursWorked > 40 THEN
+    v_OverTime := v_HoursWorked - 40;
+       DBMS_OUTPUT.PUT_LINE('Hours overtime worked = ' || v_OverTime);
+     ELSE
+          v_OverTime := 0;
+  END IF;
+END;
+/

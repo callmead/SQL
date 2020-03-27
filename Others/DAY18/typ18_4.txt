@@ -1,0 +1,9 @@
+George         Washington
+Thomas         Jefferson
+Richard        Nixon
+Jimmy          Carter
+Abraham        Lincoln
+John           Kennedy
+Theodore       Roosevelt
+George         Bush
+Ronald         Reagan

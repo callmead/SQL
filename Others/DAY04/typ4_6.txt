@@ -1,0 +1,24 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  a     VARCHAR2(30);
+  b     VARCHAR2(30);
+  c     VARCHAR2(30);
+BEGIN
+  --Concatenate several string constants.
+  c := 'Jack' || ' AND ' || 'Jill';
+  DBMS_OUTPUT.PUT_LINE(c);
+  --Concatenate both string variables and constants.
+  a := 'went up';
+  b := 'the hill';
+  DBMS_OUTPUT.PUT_LINE(a || ' ' || b || ',');
+  --Concatenate two string variables.
+  a := 'to fetch a ';
+  b := 'pail of water.';
+  c := a || b;
+  DBMS_OUTPUT.PUT_LINE(c);
+END;
+/
+utput]Jack and Jill
+went up the hill,
+to fetch a pail of water.
+PL/SQL procedure successfully completed.

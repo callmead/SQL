@@ -1,0 +1,14 @@
+--The basic arithmetic operators in action.
+--Remember to execute: SET SERVEROUTPUT ON
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(4 * 2);  --multiplication
+  DBMS_OUTPUT.PUT_LINE(24 / 3); --division
+  DBMS_OUTPUT.PUT_LINE(4 + 4);  --addition
+  DBMS_OUTPUT.PUT_LINE(16 - 8); --subtraction
+END;
+/
+utput]8
+
+
+
+PL/SQL procedure successfully completed.

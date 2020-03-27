@@ -1,0 +1,37 @@
+DECLARE
+-- Create a file handle of type UTL_FILE.FILE_TYPE to read in a file
+     v_INFileHandle UTL_FILE.FILE_TYPE;
+-- Create a file handle of type UTL_FILE.FILE_TYPE to output a file
+     v_OUTFileHandle UTL_FILE.FILE_TYPE;
+-- User defined variable for buffer
+     v_MyBuffer VARCHAR2(1022);
+BEGIN
+-- Open the files to read and write.
+     v_INFileHandle := UTL_FILE.FOPEN('c:\','ascii.txt','r');
+     v_OUTFileHandle := UTL_FILE.FOPEN('c:\','ebcdic.txt','w');
+LOOP
+     BEGIN
+-- Read in One Line
+     UTL_FILE.GET_LINE(v_INFileHandle,v_MyBuffer);
+--Output one line as EBCDIC
+     DBMS_OUTPUT.PUT_LINE(v_MyBuffer);
+     UTL_FILE.PUT_LINE(v_OUTFileHandle,convert(v_MyBuffer,'WE8EBCDIC500'));
+
+     EXCEPTION
+          WHEN NO_DATA_FOUND THEN
+               EXIT;
+
+     END;
+END LOOP;
+
+-- Close the file handle which points to myout.txt
+     UTL_FILE.FCLOSE(v_INFileHandle);
+     UTL_FILE.FCLOSE(v_OUTFileHandle);
+EXCEPTION
+-- Create Exception to simply display error code and message
+     WHEN OTHERS THEN
+          DBMS_OUTPUT.PUT_LINE
+		('ERROR ' || to_char(SQLCODE) || SQLERRM);
+          NULL;
+END;
+/

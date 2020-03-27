@@ -1,0 +1,12 @@
+UPDATE employee
+   SET home_address  = address(home_address.street_1,
+                       home_address.street_2, home_address.city,
+                       home_address.state_abbr, home_address.zip_code,
+                       '5173433333')
+ WHERE emp_id = 598;
+
+ row updated.
+
+COMMIT;
+
+Commit complete.

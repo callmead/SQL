@@ -1,0 +1,16 @@
+--This trigger allows changes to employee records
+--only on Mondays through Fridays, and only during
+--the hours of 8:00am to 5:00pm.
+CREATE OR REPLACE TRIGGER only_during_business_hours
+  BEFORE INSERT OR UPDATE OR DELETE ON employee
+BEGIN
+  IF  TO_NUMBER(TO_CHAR(SYSDATE,'hh24')) < 8 --nothing before 8:00am
+      OR TO_NUMBER(TO_CHAR(SYSDATE,'hh24')) >= 5
+cc]   --changes must be made BEFORE 5:00pm
+OR TO_CHAR(SYSDATE,'dy') in ('sun','sat') THEN --nothing on weekends
+    RAISE_APPLICATION_ERROR (-20000,
+cc]'Employee changes only allowed during business hours.');
+END IF;
+END;
+/
+Trigger created.

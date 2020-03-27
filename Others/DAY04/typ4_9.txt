@@ -1,0 +1,72 @@
+--Remember to execute; SET SERVEROUTPUT ON
+DECLARE
+  a     INTEGER;
+  b     BOOLEAN;
+  n     INTEGER;     --this will be our null value.
+BEGIN
+  --Assign a value to the variable A, but leave N null.
+  a := 2;
+  --Note that the test for A=N fails.
+  IF a = n THEN
+    DBMS_OUTPUT.PUT_LINE('a = n is true');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('a = n is not true');
+  END IF;
+  --But also note that the test for a <> n fails.
+  IF a <> n THEN
+    DBMS_OUTPUT.PUT_LINE('a <> n is true');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('a <> n is not true');
+  END IF;
+  --Here is an expression that many people first
+  --expect to always be true.
+  IF (a = n) OR (a <> n) THEN
+    DBMS_OUTPUT.PUT_LINE('(a = n) or (a <> n) is true');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('(a = n) or (a <> n) is not true');
+  END IF;
+  --TRUE and NULL = NULL
+  IF (a = 2) AND (a <> n) THEN
+    DBMS_OUTPUT.PUT_LINE('TRUE and NULL = TRUE');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('TRUE and NULL = NULL');
+  END IF;
+  --TRUE or NULL = TRUE
+  IF (a = 2) OR (a <> n) THEN
+    DBMS_OUTPUT.PUT_LINE('TRUE or NULL = TRUE');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('TRUE or NULL = NULL');
+  END IF;
+  --NOT NULL = NULL
+  IF (NOT (a = n)) IS NULL THEN
+    DBMS_OUTPUT.PUT_LINE('NOT NULL = NULL');
+  END IF;
+  --TIP: try this if you want a null value to be
+   --considered "not equal".
+  --Be careful though, if BOTH A and N are NULL
+  --NVL will still return TRUE.
+  IF NVL((a <> n),true) THEN
+    DBMS_OUTPUT.PUT_LINE('The values are not equal.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('The values are equal.');
+  END IF;
+  --TIP: a three-valued if construct.
+  b := (a <> n);
+  IF b THEN
+    DBMS_OUTPUT.PUT_LINE('a <> n is TRUE');
+  ELSIF NOT b THEN
+    DBMS_OUTPUT.PUT_LINE('a <> n is FALSE');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('a <> n is NULL');
+  END IF;
+END;
+/
+utput]a = n is not true
+a <> n is not true
+(a = n) or (a <> n) is not true
+TRUE and NULL = NULL
+TRUE or NULL = TRUE
+NOT NULL = NULL
+The values are not equal.
+a <> n is NULL
+PL/SQL procedure successfully completed.

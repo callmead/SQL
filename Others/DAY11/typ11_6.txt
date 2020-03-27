@@ -1,0 +1,41 @@
+CREATE OR REPLACE TRIGGER emp_dept_ins
+  AFTER INSERT ON emp_dept
+  FOR EACH ROW
+BEGIN
+  --Increment the employee count for the department
+  --referenced by the record just inserted.
+  UPDATE department
+    SET no_of_emps = NVL(no_of_emps,0)+1
+   WHERE dept_id = :NEW.dept_id;
+END;
+/
+Trigger created.
+ CREATE OR REPLACE TRIGGER emp_dept_del
+  AFTER DELETE ON emp_dept
+  FOR EACH ROW
+BEGIN
+  --Decrement the employee count for the department
+  --referenced by the record just deleted.
+  UPDATE department
+    SET no_of_emps = no_of_emps-1
+   WHERE dept_id = :OLD.dept_id;
+END;
+/
+Trigger created.
+CREATE OR REPLACE TRIGGER emp_dept_upd
+  AFTER UPDATE OF dept_id ON emp_dept
+  FOR EACH ROW
+BEGIN
+  --Increment the employee count for the employee's new department
+  UPDATE department
+     SET no_of_emps = NVL(no_of_emps,0)+1
+   WHERE dept_id = :NEW.dept_id;
+
+  --Decrement the employee count for the employee's
+  --previous department.
+  UPDATE department
+     SET no_of_emps = no_of_emps - 1
+   WHERE dept_id = :OLD.dept_id;
+END;
+/
+Trigger created.

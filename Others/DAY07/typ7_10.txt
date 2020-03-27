@@ -1,0 +1,2 @@
+SELECT TO_CHAR(SYSDATE,'MONTH DD YY','NLS_DATE_LANGUAGE=german')
+      "German Date" from dual;

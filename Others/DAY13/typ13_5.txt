@@ -1,0 +1,28 @@
+DECLARE
+  emp_addr    address;
+BEGIN
+  --Retrieve the object from the table
+  SELECT home_address INTO emp_addr
+    FROM employee
+   WHERE emp_id = 597;
+
+  --Use a mutator method to change the phone number.
+  emp_addr.setPhone('3139830301');
+
+  UPDATE employee
+     SET home_address = emp_addr
+   WHERE emp_id = 597;
+
+  COMMIT;
+END;
+/
+
+PL/SQL procedure successfully completed.
+
+SELECT emp_id, emp_name, home_address.phone_number home_phone
+  FROM employee
+ WHERE emp_id = 597;
+
+   EMP_ID EMP_NAME                         HOME_PHONE
+--------- -------------------------------- ----------
+      597 Matthew Higgenbottom             3139830301

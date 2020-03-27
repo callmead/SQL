@@ -1,0 +1,13 @@
+DESCRIBE USER_TRIGGERS
+ Name                            Null?    Type
+ ------------------------------- -------- ----
+ TRIGGER_NAME                    NOT NULL VARCHAR2(30)
+ TRIGGER_TYPE                             VARCHAR2(16)
+ TRIGGERING_EVENT                         VARCHAR2(26)
+ TABLE_OWNER                     NOT NULL VARCHAR2(30)
+ TABLE_NAME                      NOT NULL VARCHAR2(30)
+ REFERENCING_NAMES                        VARCHAR2(87)
+ WHEN_CLAUSE                              VARCHAR2(2000)
+ STATUS                                   VARCHAR2(8)
+ DESCRIPTION                              VARCHAR2(2000)
+ TRIGGER_BODY                             LONG

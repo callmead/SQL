@@ -1,0 +1,39 @@
+--Be sure to execute: SET SERVEROUTPUT ON
+
+DECLARE
+  a_name  VARCHAR2(30) := 'Jeff Gennick';
+
+PROCEDURE name_print IS
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(a_name);
+END;
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(a_name);
+
+  DECLARE
+    b_name  VARCHAR2(30) := 'Jenny Gennick';
+  BEGIN
+      DBMS_OUTPUT.PUT_LINE('Inside nested block');
+      DBMS_OUTPUT.PUT_LINE(a_name);
+      DBMS_OUTPUT.PUT_LINE(b_name);
+      name_print;
+  END;
+
+  DBMS_OUTPUT.PUT_LINE('Back in the main block');
+
+  --But we cannot compile the following line because b_name
+  --is not defined in this block.
+  --DBMS_OUTPUT.PUT_LINE(b_name);
+
+  --Our procedure, however, can access the value of a_name.
+  name_print;
+END;
+/
+Jeff Gennick
+Inside nested block
+Jeff Gennick
+Jenny Gennick
+Jeff Gennick
+Back in the main block
+Jeff Gennick

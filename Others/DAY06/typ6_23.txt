@@ -1,0 +1,15 @@
+BEGIN
+     <<year_loop>>
+     FOR year = v_START_YEAR to v_END_YEAR
+     LOOP
+          <<day_loop>>
+          FOR day = 1 to v_last_day_of_month
+          LOOP
+               <<month_loop>>
+               FOR month = 1 to 12
+               LOOP
+                    <statements>
+               END LOOP month_loop;
+          END LOOP day_loop;
+     END LOOP year_loop;
+END;

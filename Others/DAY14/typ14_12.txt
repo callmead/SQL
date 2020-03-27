@@ -1,0 +1,10 @@
+DECLARE
+    v_MyNumber NUMBER := 0; -- five spaces to set apart variable names
+BEGIN
+    LOOP – five spaces to separate where procedure begins and ends
+        IF v_MyNumber = 7 THEN – Five spaces for new block of code
+             EXIT;
+        END IF;
+    v_MyNumber := v_MyNumber + 2; -- Part of Loop Block
+    END LOOP;  -- Aligned under matching loop statement
+END;

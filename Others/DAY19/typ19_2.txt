@@ -1,0 +1,7 @@
+DECLARE
+     v_JobNum  BINARY_INTEGER;
+BEGIN
+     DBMS_JOB.SUBMIT(v_JobNum,'WEEKLY(''maintenance'',1000,
+          ''Friday'');',SYSDATE,
+          'NEXT_DAY(TRUNC(SYSDATE),''FRIDAY'') + 22/24');
+END;

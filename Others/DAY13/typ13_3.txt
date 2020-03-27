@@ -1,0 +1,5 @@
+ALTER TABLE employee
+  ADD (
+    home_address    address
+  );
+Table altered.

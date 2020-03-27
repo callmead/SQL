@@ -1,0 +1,29 @@
+DECLARE
+-- Variables to write out to text file called presexp.csv
+     v_SSNO       pres.ssno%TYPE;
+     v_FirstName  pres.fname%TYPE;
+     v_LastName   pres.lname%TYPE;
+--Declare filehandle
+     v_MYFileHandle UTL_FILE.FILE_TYPE;
+-- Cursor declaration to fetch data from table, row by row
+CURSOR c_PRES IS
+     SELECT * from PRES;
+BEGIN
+-- Open File for writing
+     v_MYFileHandle := UTL_FILE.FOPEN('c:\','presexp.csv','w');
+-- Open the cursor
+     OPEN c_PRES;
+     LOOP
+-- Get each row, one at a time
+          FETCH c_PRES INTO v_SSNO,v_FirstName,v_LastName;
+-- Output as CSV file
+          EXIT WHEN c_PRES%NOTFOUND;
+          UTL_FILE.PUT_LINE(v_MYFileHandle,'"' || v_SSNO || '","'
+               || v_FirstName || '","' || v_LastName || '"');
+     END LOOP;
+-- Close Cursor
+     CLOSE c_PRES;
+-- Close CSV file
+     UTL_FILE.FCLOSE(v_MYFileHandle);
+END;
+/

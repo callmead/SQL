@@ -1,0 +1,18 @@
+ UPDATE employee
+  SET pay_rate = 40
+ WHERE emp_id = 100;
+UPDATE employee
+       *
+ERROR at line 1:
+ORA-20000: Employee changes only allowed during business hours.
+ORA-06512: at "MY_READER.ONLY_DURING_BUSINESS_HOURS", line 5
+ORA-04088: error during execution of trigger
+cc] 'MY_READER.ONLY_DURING_BUSINESS_HOURS'
+ALTER TRIGGER only_during_business_hours DISABLE;
+Trigger altered.
+UPDATE employee
+  SET pay_rate = 40
+ WHERE emp_id = 100;
+1 row updated.
+ALTER TRIGGER only_during_business_hours ENABLE;
+Trigger altered.

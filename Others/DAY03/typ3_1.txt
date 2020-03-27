@@ -1,0 +1,21 @@
+--Remember to execute: SET SERVEROUTPUT ON
+SET ECHO ON
+DECLARE
+  employee_name_c CHAR(32);
+  employee_name_v VARCHAR2(32);
+BEGIN
+  --Assign the same value to each string.
+  employee_name_c := 'Jenny Gennick';
+  employee_name_v := 'Jenny Gennick';
+
+  --Test the strings for equality.
+  IF employee_name_c = employee_name_v THEN
+    DBMS_OUTPUT.PUT_LINE('The names are the same');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('The names are NOT the same');
+  END IF;
+END;
+/
+The names are NOT the same
+
+PL/SQL procedure successfully completed.

@@ -1,0 +1,54 @@
+DROP TRIGGER only_two_departments;
+Trigger dropped.
+CREATE OR REPLACE TRIGGER only_two_departments_1
+  BEFORE UPDATE OR INSERT ON emp_dept
+BEGIN
+  --Reset the list counter before starting any insert/update.
+  emp_dept_procs.init_list;
+END;
+/
+Trigger created.
+CREATE OR REPLACE TRIGGER only_two_departments_2
+  BEFORE UPDATE OR INSERT ON emp_dept
+  FOR EACH ROW
+BEGIN
+  --Add this record to the list of those changed.
+  --Validation is done after the STATEMENT is finished.
+  emp_dept_procs.add_to_list(:NEW.emp_id, :NEW.dept_id);
+END;
+/
+Trigger created.
+CREATE OR REPLACE TRIGGER only_two_departments_3
+  AFTER UPDATE OR INSERT ON emp_dept
+DECLARE
+  check_emp_id    emp_dept.emp_id%TYPE;
+  check_dept_id   emp_dept.dept_id%TYPE;
+
+  listx     BINARY_INTEGER;
+  list_max  BINARY_INTEGER;
+
+  dept_count  NUMBER;
+BEGIN
+  --Get the number of records we "touched".
+  list_max := emp_dept_procs.get_count;
+
+  --We need to check each record to see if we have
+  --violated the "only two departments" rule.
+  FOR listx IN 1..list_max loop
+    --Get the primary key for the record we are checking.
+    emp_dept_procs.get_from_list (listx, check_emp_id, check_dept_id);
+
+    --Get the number of departments for this employee.
+    SELECT COUNT(*) INTO dept_count
+      FROM emp_dept
+     WHERE emp_id = check_emp_id;
+
+    --Does the employee in question have more than two departments?
+    IF dept_count > 2 THEN
+      RAISE_APPLICATION_ERROR(-20000,
+cc]'Employees are limited to a max of two departments.');
+END IF;
+  END LOOP;
+END;
+/
+Trigger created.

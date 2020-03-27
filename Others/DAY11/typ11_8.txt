@@ -1,0 +1,50 @@
+--Create some departments.
+INSERT INTO department (dept_id, dept_name, no_of_emps)
+  VALUES (101,'Building Maintenance',0);
+1 row created.
+INSERT INTO department (dept_id, dept_name, no_of_emps)
+  VALUES (102,'Fleet Repair',0);
+1 row created.
+--Insert some employees.
+INSERT INTO employee (emp_id, emp_name, pay_rate, pay_type)
+    VALUES (102,'Herman T Jugglehead',250000,'S');
+1 row created.
+INSERT INTO employee (emp_id, emp_name, pay_rate, pay_type)
+    VALUES (103,'Albert Foxtrot',23,'H');
+1 row created.
+INSERT INTO employee (emp_id, emp_name, pay_rate, pay_type)
+    VALUES (104,'Moncton Dequinder',19.95,'S');
+1 row created.
+--Now, assign each employee to a department and then look at the counts.
+INSERT INTO emp_dept (emp_id, dept_id) VALUES (102,101);
+1 row created.
+INSERT INTO emp_dept (emp_id, dept_id) VALUES (103,101);
+1 row created.
+INSERT INTO emp_dept (emp_id, dept_id) VALUES (104,102);
+1 row created.
+SELECT * FROM department WHERE dept_id in (101,102);
+DEPT_ID DEPT_NAME                        NO_OF_EMPS
+--------- -------------------------------- ----------
+      102 FLEET REPAIR                              1
+      101 BUILDING MAINTENANCE                      2
+--Delete one employee's department assignment and look again at the counts.
+DELETE FROM emp_dept
+ WHERE emp_id = 103 and dept_id = 101;
+1 row deleted.
+SELECT * FROM department WHERE dept_id in (101,102);
+DEPT_ID DEPT_NAME                        NO_OF_EMPS
+--------- -------------------------------- ----------
+      102 FLEET REPAIR                              1
+      101 BUILDING MAINTENANCE                      1
+--Reassign the other employee and take one last look at the counts.
+UPDATE emp_dept
+   SET dept_id = 101
+ WHERE emp_id = 104 and dept_id = 102;
+1 row updated.
+SELECT * FROM department WHERE dept_id in (101,102);
+  DEPT_ID DEPT_NAME                        NO_OF_EMPS
+--------- -------------------------------- ----------
+      102 FLEET REPAIR                              0
+      101 BUILDING MAINTENANCE                      2
+COMMIT;
+Commit complete.

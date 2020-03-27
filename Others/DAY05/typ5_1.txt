@@ -1,0 +1,8 @@
+CREATE OR REPLACE FUNCTION ss_thresh
+RETURN NUMBER AS
+  x     NUMBER(9,2);
+BEGIN
+  x := 65400;
+  RETURN x;
+END;
+/

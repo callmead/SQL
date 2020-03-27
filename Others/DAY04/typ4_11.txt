@@ -1,0 +1,34 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  d1    DATE;
+  d2    DATE;
+  d3    DATE;
+  d4    DATE;
+  n1    NUMBER;
+  n2    NUMBER;
+  n3    NUMBER;
+ BEGIN
+  --Here are some common date formats which you might encounter.
+  d1 := TO_DATE('1/1/02','mm/dd/yy');
+  d2 := TO_DATE('1-1-1998','mm-dd-yyyy');
+  d3 := TO_DATE('Jan 1, 2000','mon dd, yyyy');
+  --Year 2000 problems? Note the effect of using rr instead of yy.
+  d4 := TO_DATE('1/1/02','mm/dd/rr');
+  DBMS_OUTPUT.PUT_LINE('d1 = ' || TO_CHAR(d1,'dd-Mon-yyyy'));
+  DBMS_OUTPUT.PUT_LINE('d2 = ' || TO_CHAR(d2,'mm/dd/yyyy'));
+  DBMS_OUTPUT.PUT_LINE('d3 = ' || TO_CHAR(d3,'Day, Month dd, yyyy'));
+  DBMS_OUTPUT.PUT_LINE('d4 = ' || TO_CHAR(d4,'Dy, Mon dd, yyyy'));
+  --Here are some examples of numeric conversions.
+  n1 := TO_NUMBER ('123.99','999D99');
+  n2 := TO_NUMBER ('$1,235.95','$9G999D99');
+  DBMS_OUTPUT.PUT_LINE('n1 = ' || TO_CHAR(n1,'999D99'));
+  DBMS_OUTPUT.PUT_LINE('n2 = ' || TO_CHAR(n2,'$9G999D99'));
+END;
+/
+utput]d1 = 01-Jan-1902
+d2 = 01/01/1998
+d3 = Saturday , January   01, 2000
+d4 = Tue, Jan 01, 2002
+n1 =  123.99
+n2 =  $1,235.95
+PL/SQL procedure successfully completed.

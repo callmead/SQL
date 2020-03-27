@@ -1,0 +1,14 @@
+SQL> SELECT * from master_personnel
+SQL> WHERE job = '&c_job'
+SQL> ORDER BY &c_job
+
+Enter value for c_job: teacher
+old SELECT * from master_personnel
+old WHERE job = '&c_type'
+new SELECT * from master_personnel
+new WHERE job = 'teacher'
+
+
+Enter value for c_job: teacher
+old ORDER BY &c_job
+new ORDER BY 'teacher'

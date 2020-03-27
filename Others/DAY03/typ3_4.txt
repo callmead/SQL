@@ -1,0 +1,26 @@
+--Count up by hundreds until we get an error.
+DECLARE
+  --Note that with a scale of -2 this variable can only
+  --hold values like 100,200,300... up to 900.
+  hundreds_counter  NUMBER(1,-2);
+BEGIN
+  hundreds_counter := 100;
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(hundreds_counter);
+    hundreds_counter := hundreds_counter + 100;
+  END LOOP;
+EXCEPTION
+WHEN OTHERS THEN
+  DBMS_OUTPUT.PUT_LINE('That is as high as we can go.');
+END;
+/
+
+100
+200
+300
+400
+500
+600
+700
+800
+900

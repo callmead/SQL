@@ -1,0 +1,5 @@
+ERROR:
+ORA-01843: not a valid month
+
+
+no rows selected

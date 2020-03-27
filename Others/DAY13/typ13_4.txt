@@ -1,0 +1,38 @@
+INSERT INTO employee
+  (emp_id, emp_name,pay_rate,pay_type,home_address)
+  VALUES (597,'Matthew Higgenbottom',120000,'S',
+          address('101 Maple','','Mio','MI','48640','5173943551'));
+
+ row created.
+
+COMMIT;
+
+Commit complete.
+
+DECLARE
+  emp_home_address    address;
+BEGIN
+  emp_home_address := address('911 Pearl','Apt 2','Lewiston',
+cc]'MI','48645','5173363366');
+  INSERT INTO employee
+    (emp_id, emp_name,pay_rate,pay_type,home_address)
+    VALUES (598, 'Raymond Gennick',55,'H',emp_home_address);
+  COMMIT;
+END;
+/
+
+PL/SQL procedure successfully completed.
+
+SELECT emp_id, emp_name, home_address
+  FROM employee
+ WHERE home_address IS NOT null;
+
+   EMP_ID EMP_NAME
+--------- --------------------------------
+HOME_ADDRESS(STREET_1, STREET_2, CITY, STATE_ABBR, ZIP_CODE, PHONE_NUMBER)
+--------------------------------------------------------------------------
+      597 Matthew Higgenbottom
+ADDRESS('101 Maple', NULL, 'Mio', 'MI', '48640', '5173943551')
+
+      598 Raymond Gennick
+ADDRESS('911 Pearl', 'Apt 2', 'Lewiston', 'MI', '48645', '5173363366')

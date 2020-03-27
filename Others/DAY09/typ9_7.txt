@@ -1,0 +1,6 @@
+BEGIN
+for row_indicator in 1 .. 50
+LOOP
+dbms_output.put_line (emp_table (row_indicator);
+END LOOP;
+END;

@@ -1,0 +1,9 @@
+SELECT trigger_name, triggering_event, trigger_type
+FROM USER_TRIGGERS
+WHERE table_name = 'EMPLOYEE'
+ORDER BY trigger_name;
+TRIGGER_NAME                   TRIGGERING_EVENT           TRIGGER_TYPE
+------------------------------ -------------------------- ----------------
+emp_pay_type_chg               UPDATE                     BEFORE EACH ROW
+maintain_pay_history           INSERT OR UPDATE OR DELETE AFTER EACH ROW
+only_during_business_hours     INSERT OR UPDATE OR DELETE BEFORE STATEMENT

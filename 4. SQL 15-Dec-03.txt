@@ -1,0 +1,113 @@
+SQL CLass 15-12-03
+
+DDL 
+Creating Tables
+===============
+
+Rules for creating tables
+-------------------------
+
+1) Must begin with a letter A-Z or a-z.
+2) May contain letters, numbers, and special cheracters($,#).
+3) It is not case sensitive.
+4) Upto 30 Cheracters in length.
+5) May not be duplicated.
+6) May not duplicate a Oracle reserve word.
+
+It will be better to create a new database for a new project. After creating new database we create
+Users for that database and then we create tables. But now today we will learn how to create tables.
+
+
+Create table friend(
+	Name varchar(40),
+	Address varchar(50),
+	DOB date,
+	Phone varchar(30),
+	email varchar(20),
+	City varchar(20));
+
+
+Now if we want to enter some data then see inserting portion
+----------------------------------------------------------------------------------------------------
+
+Now we will create a table with some rules and specifications
+
+Create table customers(
+	cid number(4),
+	cname varchar(40) constraint nl_cname not null,   //--- [constraint nl_cname] is the optional part we can omit this part no problem
+	age number constraint check_age check(age between 20 and 50), //--- Just checking age that it should be between 20-50
+	Credit_Card_No varchar(20),
+	address varchar(50) not null,
+	phone varchar(20),
+	constraint unique_credit unique(Credit_Card_No), //--- [Unique_credit] is only a name any name can be given. And in the (Credir_Card_No) is the field name who's every data should be unique.
+	constraint pk_cid primary key(cid));  //--- adding primary key on cid field.
+-----------------------------------------------------------------------------------------------------
+	
+Constraints are:
+
+1) Unique	2) Primary Key	3) Foreign Key	4) Check	5) Not Null
+
+unique can not be duplicated but can be kept null, where as primary key can not be duplicated as well as 
+can not be kept null.
+
+-----------------------------------------------------------------------------------------------------
+
+Column Level Constraints and Table Level Constraints
+====================================================
+
+Column Level
+------------
+Column level constraints refrences a single column & define with in the specification for the owning colummn.
+
+
+Table Level
+------------
+This may refrence one or more columns & defined seperately from the defination of the columns in the table.
+
+-----------------------------------------------------------------------------------------------------
+
+Primary Key syntax
+------------------
+
+Table Level:
+[Constraint constraint_name] Primary Key(column name)
+
+Column Level:
+[Constraint constraint_name] Primary Key
+
+
+Unique Syntax
+-------------
+
+Table Level:
+[Constraint constraint_name] Unique(column name)
+
+Column Level:
+[Constraint constraint_name] Unique
+
+same for other constraints just change their names.
+-----------------------------------------------------------------------------------------------------
+
+Creating a Foreign Key in the table Table Level PK and FK
+---------------------------------------------------------
+
+Create table COrder(
+	orderno number,
+	orderdate date not null,
+	cid number(4),
+	total number,
+	constraint pk_ord primary key (orderno),
+	constraint fk_cid foreign key (cid) references customers(cid));
+-----------------------------------------------------------------------
+
+Creating a Foreign Key in the table Column Level PK and FK
+----------------------------------------------------------
+
+Create table COrder(
+	orderno number primary key,
+	orderdate date not null,
+	cid number(4) constraint fk_cid references customers(cid),
+	total number);
+-----------------------------------------------------------------------
+
+

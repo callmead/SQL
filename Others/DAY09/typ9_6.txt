@@ -1,0 +1,13 @@
+DECLARE
+v_emp_id      INTEGER;
+BEGIN
+SELECT  emp_id
+into v_emp_id
+from employee
+WHERE emp_name = 'Jack Richards';
+exception
+when no_data_found THEN
+emp_name:='NO EMPLOYEE';
+when too_many_rows THEN
+emp_name:='TOO MANY EMPLOYEES FOUND';
+END;

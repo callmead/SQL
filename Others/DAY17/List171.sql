@@ -1,0 +1,31 @@
+DECLARE
+/* The purpose of this PL/SQL block is to create a table
+   called MyTable, which has two columns of type INTEGER and
+   the second column of type VARCHAR2(50).  This utilizes the
+   DBMS_SQL package to execute DDL statements */
+
+     v_CursorID  NUMBER; -- Variable assigned to value from OPEN_CURSOR
+     v_CreateTableString  VARCHAR2(500); -- SQL stored as string to create table
+     v_NUMRows  INTEGER; -- Number of rows processed - of no use
+
+BEGIN
+     v_CursorID := DBMS_SQL.OPEN_CURSOR; -- Get the Cursor ID
+     v_CreateTableString := 'CREATE TABLE MyTable(
+          MyRow INTEGER,
+          MyDesc VARCHAR2(50))'; -- Write SQL code to create table
+  
+     DBMS_SQL.PARSE(v_CursorID,v_CreateTableString,DBMS_SQL.V7);
+          /* Perform syntax error checking */
+     v_NumRows := DBMS_SQL.EXECUTE(v_CursorID);
+          /* Execute the SQL code  */
+
+EXCEPTION
+     WHEN OTHERS THEN
+          IF SQLCODE != -955 THEN -- 955 is error that table exists
+               RAISE; -- raise if some other unknown error
+          ELSE
+               DBMS_OUTPUT.PUT_LINE('Table Already Exists!');
+          END IF;
+     DBMS_SQL.CLOSE_CURSOR(v_CursorID); -- Close the cursor
+END; -- End PL/SQL block
+    

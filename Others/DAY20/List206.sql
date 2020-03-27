@@ -1,0 +1,3 @@
+DELETE from EMPLOYEE
+    WHERE emp_id = 9109;
+COMMIT;

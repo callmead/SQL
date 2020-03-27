@@ -1,0 +1,10 @@
+ CREATE TABLE employee
+       (emp_id           INTEGER,
+         emp_name      VARCHAR2(32),
+         supervised_by      INTEGER,
+         pay_rate               NUMBER(9,2),
+         pay_type              CHAR,
+         emp_dept_id                 INTEGER);
+
+ALTER TABLE employee
+ADD CONSTRAINT pk_emp primary key (emp_id);

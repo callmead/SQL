@@ -1,0 +1,22 @@
+Title: ORACLE UNLEASHED, 2E
+Description: Oracle Unleashed, 2E is broken into several parts to help readers find the information they need:
+Part I: Oracle Concepts
+This section takes the reader through an introduction of what Oracle, a RDBMS, Client/Server and Network Computing Architecture (NCA) is all about.
+Part II:	Oracle Tools and Utilities
+Readers learn the fundamentals of key Oracle tools needed to build robust applications or administer a system
+Part III: Database Administration
+Readers learn the basics of administrating a RDBMS. This section alone will get an administrator up and running an effective system in no time.
+Part IV: Developing Applications
+This section teaches the reader how to design and develop a robust application. The reader can take this fundamental knowledge and apply it using the various Oracle and third party products.
+Part V: Designer/2000
+The reader will learn how to design an Oracle database and create an environment that takes business rules into consideration.
+Part VI: Developer/2000
+Coupled with Designer/2000, Developer/2000 will help the reader move from design through deployment. This section shows the reader how to maximize Reports, Forms, and Graphics to build robust systems 
+Part VII: Oracle Power Objects
+This section takes the reader through the development process using this object-oriented development tool. This product works similar to VB and PowerBuilder.
+Part VIII: Oracle Objects for OLE
+This product gives users the opportunity to access Oracle data through C++, VB, and other Microsoft products.
+Part IX: Oracle and the Web
+This section provides the reader with the knowledge of Web cartridges, CORBA cartridges and Java cartridges to develop web applications connected to Oracle databases.
+
+

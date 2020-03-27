@@ -1,0 +1,8 @@
+DECLARE
+  x     INTEGER;
+BEGIN
+  x := 65400;
+  dbms_output.put_line('The variable  X = ');
+  dbms_output.put_line(x);
+END;
+/

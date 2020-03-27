@@ -1,0 +1,28 @@
+set pagesize 22
+set linesize 60
+set feedback off
+ttitle 'Monthly Sales|for June'
+btitle 'Confidential'
+
+SELECT sales_region, sales_totals from master_sales
+WHERE sales_month = '06'
+
+Monthly Sales
+For June
+
+SALES_REGION      SALES_TOTALS
+------------      ------------
+
+North East        99204
+South East        72900
+Mid West        921892
+Plains        69916
+South West        98421
+West            1027653
+North West        87367
+
+Confidential
+
+
+ttitle off
+btitle off

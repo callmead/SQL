@@ -1,0 +1,22 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  test  INTEGER;
+BEGIN
+  --The variable TEST is currently null because
+  --a value hasn't been assigned to it yet.
+  IF test IS NULL THEN
+    DBMS_OUTPUT.PUT_LINE('The variable TEST is null.');
+  END IF;
+  --Assign a value to TEST and display it.
+  test := 1;
+  DBMS_OUTPUT.PUT_LINE('TEST = ' || TO_CHAR(test));
+  --Test is no longer null because a value has been assigned to it.
+  IF test IS NOT NULL THEN
+    DBMS_OUTPUT.PUT_LINE('The variable TEST is NOT null.');
+  END IF;
+END;
+/
+utput]The variable TEST is null.
+TEST = 1
+The variable TEST is NOT null.
+PL/SQL procedure successfully completed.

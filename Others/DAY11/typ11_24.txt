@@ -1,0 +1,50 @@
+INSERT INTO employee
+  (emp_id,emp_name) VALUES (403,'Freddie Fisher');
+1 row created.
+INSERT INTO employee
+  (emp_id,emp_name) VALUES (404,'Charlie Tuna');
+1 row created.
+INSERT INTO department
+  (dept_id, dept_name) VALUES (404,'Scale Processing');
+1 row created.
+INSERT INTO department
+  (dept_id, dept_name) VALUES (405,'Gutting');
+1 row created.
+INSERT INTO department
+  (dept_id, dept_name) VALUES (406,'Unloading');
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (403,404);
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (403,405);
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (404,405);
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (404,406);
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (403,406);
+INSERT INTO emp_dept
+*
+ERROR at line 1:
+ORA-20000: Employees are limited to a max of two departments.
+ORA-06512: at "MY_READER.ONLY_TWO_DEPARTMENTS_3", line 21
+ORA-04088: error during execution of trigger 
+cc]'MY_READER.ONLY_TWO_DEPARTMENTS_3'
+UPDATE emp_dept
+  SET dept_id = 406
+ WHERE emp_id = 403 AND dept_id = 405;
+1 row updated.
+UPDATE emp_dept
+   SET emp_id = 403
+ WHERE emp_id = 404
+   AND dept_id = 405;
+update emp_dept
+       *
+ERROR at line 1:
+ORA-20000: Employees are limited to a max of two departments.
+ORA-06512: at "MY_READER.ONLY_TWO_DEPARTMENTS_3", line 21
+ORA-04088: error during execution of trigger 'MY_READER.ONLY_TWO_DEPARTMENTS_3'

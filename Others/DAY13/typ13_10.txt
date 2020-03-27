@@ -1,0 +1,27 @@
+SET SERVEROUTPUT ON
+DECLARE
+  this_building   building;
+
+  CURSOR all_buildings IS
+    SELECT value (b) AS bldg
+      FROM buildings b
+     ORDER BY b.BldgName;
+
+BEGIN
+  FOR one_building IN all_buildings LOOP
+    --Grab a copy of the building object.
+    this_building := one_building.bldg;
+    dbms_output.put_line(this_building.BldgName || ' is located in '
+                     || this_building.BldgAddress.city
+                     || ' ' || this_building.BldgAddress.state_abbr);
+  END LOOP;
+
+  COMMIT;
+END;
+/
+
+East Storage Shed is located in Lansing MI
+Headquarters Building is located in Detroit MI
+Victor Building is located in Lansing MI
+
+PL/SQL procedure successfully completed.

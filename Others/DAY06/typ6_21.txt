@@ -1,0 +1,12 @@
+BEGIN
+     FOR I = 1995 to 1997
+     LOOP
+          FOR J = 1 to 31
+          LOOP
+               FOR K = 1 to 12
+               LOOP
+                    <statements>
+               END LOOP;
+          END LOOP;
+     END LOOP;
+END;

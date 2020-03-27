@@ -1,0 +1,29 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  payment_due_date  DATE;
+BEGIN
+  --In real life the payment_due date might be read from
+  --a database or calculated based on information from a database.
+  payment_due_date := TO_DATE('1-Jun-1997','dd-mon-yyyy');
+  --Display the current date and the payment date.
+  DBMS_OUTPUT.PUT_LINE('Today is ' || TO_CHAR(SYSDATE,'dd-Mon-yyyy'));
+  DBMS_OUTPUT.PUT_LINE('Payment is due on '
+  || TO_CHAR(payment_due_date,'dd-Mon-yyyy'));
+  IF payment_due_date = SYSDATE THEN
+    DBMS_OUTPUT.PUT_LINE('Payment is due today.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Payment can wait a while.');
+  END IF;
+  --In reality, the time does not matter when speaking of a due date.
+  IF TRUNC(payment_due_date) = TRUNC(SYSDATE) THEN
+    DBMS_OUTPUT.PUT_LINE('Wrong! Payment is due today!');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Wrong! Payment can wait a while.');
+  END IF;
+END;
+/
+utput]Today is 01-Jun-1997
+Payment is due on 01-Jun-1997
+Payment can wait a while.
+Wrong! Payment is due today!
+PL/SQL procedure successfully completed.

@@ -1,0 +1,6 @@
+SELECT LINE, TYPE, NAME, TEXT from user_errors
+
+LINE  TYPE   NAME     TEXT
+----- ------ ------   ------------------------------------
+  4   PROC   PST_QTY  PL/SQL-00387: into variable cannot be a database object
+                      PL/SQL: SQL statement ignored

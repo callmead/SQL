@@ -1,0 +1,68 @@
+SQL Class 15-11-03
+
+Sub Querries
+============
+
+Query 1) select * from emp where ename='JONES';
+Query 2) select * from emp where sal>2975;
+
+If we combine the above Querry we get a sub Query, it means Query inside a Query
+See below 2 in 1
+
+Select * from emp where sal>(select sal from emp where ename='JONES');
+
+closely analyse the above querry we are using sal outside as well as inside sal also this is a rule.
+That you will select the same columns see some more examples;
+-------------------------------------------------------------
+
+The next Querry shows the same Designation as SMITH
+
+	select * from emp where job=(select job from emp where ename='SMITH');
+
+List that employee who are getting highest salary in dept no 20
+
+	select max(sal) from emp where deptno=20;
+
+Now show who gets more salary then the above Querry's result see below
+	
+	select * from emp where sal>(select max(sal) from emp where deptno=20);
+
+Show those employees who get more salary then any employee then dept no 30
+
+	select * from emp where sal>(select min(sal) from emp where deptno=30);
+
+or we can write the same Querry as follow see below
+	
+	select * from emp where sal>any (select sal from emp where deptno=30);
+	any is used for Min (minimum value)
+
+for Max we use all see below
+	
+	select * from emp where sal>all (select sal from emp where deptno=30);
+
+Show those employees who earn less then the avg salary then managers
+	
+	select * from emp where sal<(select avg(sal) from emp where job='MANAGER');
+
+Show those employees who are getting more salary then the avg salary of managers
+
+	select * from emp where job='MANAGER' and sal>(select avg(sal) from emp where job='MANAGER');
+	or
+	select * from emp where sal>(select avg(sal) from emp where job='MANAGER') and job='MANAGER';
+
+List employees in dept no 10 with same job as anyone as martin
+	
+	select * from emp where deptno=10 and job=(select * from emp where ename='SMITH');
+
+-----------------------------------------------------------------------------------------
+List employees as the same job and sale sal as ford
+
+	select * from emp where
+	sal=(select sal from emp where ename='FORD')
+	and job=(select job from emp where ename='FORD');
+
+	or
+
+	select * from emp where (job,sal)=(select job,sal from emp where ename='SMITH');
+-----------------------------------------------------------------------------------------
+

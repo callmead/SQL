@@ -1,0 +1,9 @@
+Title:  Oracle Data Warehousing Unleashed 
+Description: Oracle Data Warehousing Unleashed presents topic by topic coverage of everything the reader will need when it comes to building a data warehouse.  
+Section 1 lays the groundwork for the Initialization and Project Planning phase of building a data warehouse.
+Section 2 focuses on the challenges of preparing your existing data for the conversion to a data warehouse through integration and cleansing techniques.
+Section 3 walks the reader through the key design issues, concerns and problems related to the logical and physical database design of an Oracle data warehouse.
+Section 4 covers the security, backup and recovery and other management concerns within a data warehouse.
+Section 5 addresses the administrative tuning issues that every reader will face.
+Section 6 informs the reader of the myriad of data access challenges awaiting them and provides key solutions to these challenges
+

@@ -1,0 +1,42 @@
+CREATE OR REPLACE TYPE building AS OBJECT (
+  BldgName          VARCHAR2(40),
+  BldgAddress       address,
+  BldgMgr           INTEGER,
+  MEMBER PROCEDURE  ChangeMgr (SELF IN OUT building,
+                               NewMgr IN INTEGER),
+  ORDER MEMBER FUNCTION Compare (SELF IN building,
+                                 OtherBuilding IN building)
+      RETURN INTEGER
+  );
+
+CREATE OR REPLACE TYPE BODY building AS
+  MEMBER PROCEDURE  ChangeMgr(SELF IN OUT building,
+                              NewMgr IN INTEGER) IS
+    BEGIN
+      SELF.BldgMgr := NewMgr;
+    END;
+
+  ORDER MEMBER FUNCTION Compare (SELF IN building,
+                                 OtherBuilding IN building)
+  RETURN INTEGER IS
+      BldgName1     VARCHAR2(40);
+      BldgName2     building.BldgName%TYPE;
+    BEGIN
+      --Grab the two building names for comparison.
+      --Make sure that we don't get messed up by leading/trailing
+      --spaces or by case.
+      BldgName1 := upper(ltrim(rtrim(SELF.BldgName)));
+      BldgName2 := upper(ltrim(rtrim(OtherBuilding.BldgName)));
+
+      --Return the appropriate value to indicate the order of
+      --this object vs OtherBuilding.
+      IF BldgName1 = BldgName2 THEN
+        RETURN 0;
+      ELSIF BldgName1 < BldgName2 THEN
+        RETURN -1;
+      ELSE
+        RETURN 1;
+      END IF;
+    END;
+END;
+/

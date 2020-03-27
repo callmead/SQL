@@ -1,0 +1,20 @@
+DECLARE
+      v_Calc NUMBER := 0;
+BEGIN
+     WHILE v_Calc <= 10 LOOP
+          v_Calc := v_Calc + 1;
+          DBMS_OUTPUT.PUT_LINE('The value of v_Calc is ' || v_Calc);
+     END LOOP;
+END;
+/
+The value of v_Calc is 1
+The value of v_Calc is 2
+The value of v_Calc is 3
+The value of v_Calc is 4
+The value of v_Calc is 5
+The value of v_Calc is 6
+The value of v_Calc is 7
+The value of v_Calc is 8
+The value of v_Calc is 9
+The value of v_Calc is 10
+The value of v_Calc is 11

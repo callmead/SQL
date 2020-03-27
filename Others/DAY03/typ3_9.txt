@@ -1,0 +1,39 @@
+--This is a pl/sql wrapper that exercises the
+--function shown in listing 3.5.
+--Be sure to execute: SET SERVEROUTPUT ON 
+--
+DECLARE
+temp  NUMBER;
+
+  FUNCTION iifn(boolean_expression IN BOOLEAN,
+              true_number IN NUMBER,
+              false_number IN NUMBER)
+  RETURN NUMBER IS
+  BEGIN
+    IF boolean_expression THEN
+      RETURN true_number;
+    ELSIF NOT boolean_expression THEN
+      RETURN false_number;
+    ELSE
+      --nulls propagate, i.e. null input yields null output.
+      RETURN NULL;
+    END IF;
+  END;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(iifn(2 > 1,1,0));
+  DBMS_OUTPUT.PUT_LINE(iifn(2 > 3,1,0));
+  --
+  --The next few lines verify that a null input yields a null output.
+  temp := iifn(null,1,0);
+  IF temp IS NULL THEN
+    DBMS_OUTPUT.PUT_LINE('NULL');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE(temp);
+  END IF;
+END;
+/
+1
+0
+NULL
+
+PL/SQL procedure successfully completed.

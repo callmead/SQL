@@ -1,0 +1,25 @@
+CREATE TABLE security(
+/*This database hold the original and new data archived from
+  the payroll database to look for any violations of pay rate,
+  name changes, and so on by internal employees or external hackers */
+
+/*  Store the original values */
+     OLD_Emp_Id INTEGER,
+     OLD_Emp_Name VARCHAR2(32),
+     OLD_Supervised_By INTEGER,
+     OLD_Pay_Rate NUMBER(9,2),
+     OLD_Pay_Type CHAR,
+     OLD_Emp_Dept_Id INTEGER,
+/* Store the changed values */
+     NEW_Emp_Id INTEGER,
+     NEW_Emp_Name VARCHAR2(32),
+     NEW_Supervised_By INTEGER,
+     NEW_Pay_Rate NUMBER(9,2),
+     NEW_Pay_Type CHAR,
+     NEW_Emp_Dept_Id INTEGER,
+/* Flag to retain status if security has verified the change (Y/N)*/
+     Verified CHAR(1),
+/* Store Date and who made the changes */
+     Changed_By VARCHAR2(8),
+     Time_Changed DATE)
+/

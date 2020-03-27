@@ -1,0 +1,28 @@
+SELECT * FROM emp_pay_history;
+no rows selected
+INSERT INTO employee
+  (emp_id, emp_name, pay_rate, pay_type)
+  VALUES (301,'Jerome Finkbeiner',2000,'H');
+1 row created.
+UPDATE employee
+  SET pay_rate = 4000000,
+      pay_type = 'S'
+ WHERE emp_id = 301;
+1 row updated.
+DELETE FROM employee
+  WHERE emp_id = 301;
+1 row deleted.
+COLUMN as_of FORMAT a20
+COLUMN emp_name FORMAT a20
+SELECT  emp_pay_history_pk,
+        emp_id,
+        TO_CHAR(as_of,'dd-Mon-yyyy hh:mm pm') as_of,
+        emp_name,
+        pay_type,
+        pay_rate
+  FROM  emp_pay_history;
+EMP_PAY_HISTORY_PK EMP_ID AS_OF                EMP_NAME           P PAY_RATE
+------------------ ------ -------------------- ------------------ - --------
+7                  301    18-Jun-1997 06:06 pm Jerome Finkbeiner  H     2000
+8                  301    18-Jun-1997 06:06 pm Jerome Finkbeiner  S  4000000
+9                  301    18-Jun-1997 06:06 pm Jerome Finkbeiner

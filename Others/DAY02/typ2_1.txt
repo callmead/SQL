@@ -1,0 +1,14 @@
+set pagesize 6
+set pause 'Press <return> to continue...'
+set pause on
+SELECT city_name from city_index
+city_name
+---------
+charlotte
+chicago
+clarion
+davidson
+donaldston
+dover
+
+Press <return> to continue...

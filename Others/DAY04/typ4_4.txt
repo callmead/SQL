@@ -1,0 +1,38 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  test_date     DATE;
+  day_of_week   VARCHAR2(3);
+  years_ahead   INTEGER;
+BEGIN
+  --Assign a date value to test_date.
+  --Let's use Independence Day.
+  test_date := TO_DATE('4-Jul-1997','dd-mon-yyyy');
+  --Now let's look ahead ten years and see how many
+  --three day July 4 weekends we can expect.
+  FOR years_ahead IN 1..10 LOOP
+    --get the name for the day of the week.
+    day_of_week := TO_CHAR(test_date,'Dy');
+    --most employers give an extra day if July 4 falls on a weekend.
+    IF day_of_week IN ('Mon','Fri','Sat','Sun') THEN
+      DBMS_OUTPUT.PUT_LINE(TO_CHAR(test_date,'dd-Mon-yyyy')
+                           || '     A long weekend!');
+    ELSE
+      DBMS_OUTPUT.PUT_LINE(TO_CHAR(test_date,'dd-Mon-yyyy')
+                             || ' Not a long weekend.');
+    END IF;
+    --advance one year (12 months)
+    test_date := ADD_MONTHS(test_date,12);
+  END LOOP; --for each year
+END;
+/
+utput]04-Jul-1997     A long weekend!
+-Jul-1998     A long weekend!
+-Jul-1999     A long weekend!
+-Jul-2000 Not a long weekend.
+-Jul-2001 Not a long weekend.
+-Jul-2002 Not a long weekend.
+-Jul-2003     A long weekend!
+-Jul-2004     A long weekend!
+-Jul-2005     A long weekend!
+-Jul-2006 Not a long weekend.
+PL/SQL procedure successfully completed.

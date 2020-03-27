@@ -1,0 +1,20 @@
+SET SERVEROUTPUT ON
+DECLARE
+  this_building     building;
+BEGIN
+  --Retrieve a building object so we can print the attribute values.
+  SELECT value(b) INTO this_building
+    FROM buildings b
+   WHERE BldgName = 'East Storage Shed';
+
+  COMMIT;
+
+  dbms_output.put_line(this_building.BldgName
+                      || ' ' || this_building.BldgAddress.city
+                      || ' ' || this_building.BldgAddress.state_abbr);
+END;
+/
+
+East Storage Shed Lansing MI
+
+PL/SQL procedure successfully completed.

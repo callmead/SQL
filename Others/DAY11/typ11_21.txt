@@ -1,0 +1,47 @@
+INSERT INTO employee
+  (emp_id,emp_name) VALUES (401,'Harvey Wallbanger');
+1 row created.
+INSERT INTO employee
+  (emp_id,emp_name) VALUES (402,'Scarlet Tanninger');
+1 row created.
+INSERT INTO department
+  (dept_id, dept_name) VALUES (401,'Fermentation');
+1 row created.
+INSERT INTO department
+  (dept_id, dept_name) VALUES (402,'Distillation');
+1 row created.
+INSERT INTO department
+  (dept_id, dept_name) VALUES (403,'Bottling');
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (401,401);
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (401,402);
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (402,402);
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (402,403);
+1 row created.
+INSERT INTO emp_dept
+  (emp_id, dept_id) VALUES (401,403);
+INSERT INTO emp_dept
+            *
+ERROR at line 1:
+ORA-20000: Employees are limited to a max of two departments.
+ORA-06512: at "MY_READER.ONLY_TWO_DEPARTMENTS", line 17
+ORA-04088: error during execution of trigger 
+cc]'MY_READER.ONLY_TWO_DEPARTMENTS'
+UPDATE emp_dept
+  SET dept_id = 403
+ WHERE emp_id = 401 AND dept_id = 402;
+UPDATE emp_dept
+       *
+ERROR at line 1:
+ORA-04091: table MY_READER.EMP_DEPT is mutating, 
+cc]trigger/function may not see it
+ORA-06512: at "MY_READER.ONLY_TWO_DEPARTMENTS", line 6
+ORA-04088: error during execution of trigger 
+cc]'MY_READER.ONLY_TWO_DEPARTMENTS'

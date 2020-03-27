@@ -1,0 +1,46 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  age   POSITIVE;
+
+  current_year  NATURAL;    --a year of 00 is valid.
+  current_month POSITIVE;
+  current_day   POSITIVE;
+
+  birth_year    NATURAL;    --a year of 00 is valid.
+  birth_month   POSITIVE;
+  birth_day     POSITIVE;
+
+  birth_date    DATE := TO_DATE('11-15-1961','mm-dd-yyyy');
+  current_date  DATE;
+BEGIN
+  --Set the current date.  Normally we would do "current_date := sysdate",
+  --but LET'S pretend it's the year 2000.
+  current_date := TO_DATE ('12-1-2000','mm-dd-yyyy');
+
+  --Show the effect of trying to set a negative age.
+  --Pretend it's the year 2000 and we forgot to convert this code.
+  --Note that only the two digit year is retrieved.
+  current_year := TO_NUMBER(TO_CHAR(current_date,'yy'));
+  current_month := TO_NUMBER(TO_CHAR(current_date,'mm'));
+  current_day := TO_NUMBER(TO_CHAR(current_date,'dd'));
+
+  --Oops! Only two digits allowed for birth year.
+  birth_year := TO_NUMBER(TO_CHAR(birth_date,'yy'));
+  birth_month := TO_NUMBER(TO_CHAR(birth_date,'mm'));
+  birth_day := TO_NUMBER(TO_CHAR(birth_date,'dd'));
+
+  --Now make the actual computation.
+  IF current_month > birth_month THEN
+    age := current_year - birth_year;
+  ELSIF (current_month = birth_month) and (current_day >= birth_day) THEN
+    age := current_year - birth_year;
+  ELSE
+    age := current_year - birth_year - 1;
+  END IF;
+END;
+/
+DECLARE
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error
+ORA-06512: at line 25

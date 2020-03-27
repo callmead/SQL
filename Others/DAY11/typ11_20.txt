@@ -1,0 +1,27 @@
+CREATE OR REPLACE TRIGGER only_two_departments
+  BEFORE UPDATE OR INSERT ON emp_dept
+  FOR EACH ROW
+DECLARE
+  dept_count  INTEGER;      --# of depts for this employee
+  max_depts   INTEGER := 2; --max number of depts per employee.
+BEGIN
+  --Get the current number of departments for this employee.
+  SELECT COUNT(*) INTO dept_count
+    FROM emp_dept
+   WHERE emp_id = :NEW.emp_id;
+
+  --On an update, when the old and new emp_id values are the same,
+  --we do not need to recheck the count.
+  IF :OLD.emp_id = :NEW.emp_id THEN
+    RETURN;
+  ELSE
+    --if the employee already is at the max, don't allow him to
+    --have another department.
+    IF dept_count >= max_depts THEN
+      RAISE_APPLICATION_ERROR (-20000,
+cc]'Employees are limited to a max of two departments.');
+END IF;
+  END IF;
+END;
+/
+Trigger created.

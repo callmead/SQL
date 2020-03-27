@@ -1,0 +1,7 @@
+DECLARE
+     v_Convert_Number NUMBER := 90210;
+     v_Hold_Char VARCHAR2(21) ;
+BEGIN
+     v_Hold_Char := TO_CHAR(v_Convert_Number,'9.99EEEE');
+     DBMS_OUTPUT.PUT_LINE('The Scientific Notation is: ' || v_Hold_Char);
+END;

@@ -1,0 +1,5 @@
+CREATE OR REPLACE FUNCTION squareme(thenum number)
+     RETURN NUMBER IS
+BEGIN
+     RETURN thenum * thenum;
+END squareme;

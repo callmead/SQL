@@ -1,0 +1,32 @@
+CREATE OR REPLACE FUNCTION GetEmpBldgName (
+  EmpNumIn IN employee.emp_id%TYPE
+  ) RETURN VARCHAR2 AS
+TheBldg     building;
+BEGIN
+  --Select the building object reference from this employee's record.
+  SELECT DEREF(emp_bldg) INTO TheBldg
+    FROM employee
+   WHERE emp_id = EmpNumIn;
+
+  IF TheBldg IS NULL THEN
+    RETURN 'No Building Assigned';
+  ELSE
+    RETURN TheBldg.BldgName;
+  END IF;
+END;
+/
+
+Function created.
+
+BEGIN
+  dbms_output.put_line(GetEmpBldgName(599));
+  dbms_output.put_line(GetEmpBldgName(598));
+  dbms_output.put_line(GetEmpBldgName(597));
+END;
+/
+
+Software Research
+Victor Building
+East Storage Shed
+
+PL/SQL procedure successfully completed.

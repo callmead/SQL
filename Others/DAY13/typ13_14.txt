@@ -1,0 +1,30 @@
+CREATE OR REPLACE PROCEDURE AssignEmpToBldg (
+  EmpNumIn IN employee.emp_id%TYPE,
+  BldgNameIn IN buildings.BldgName%TYPE
+  ) AS
+BEGIN
+  UPDATE employee
+     SET emp_bldg = (SELECT REF(b)
+                      FROM buildings B
+                     WHERE BldgName = BldgNameIn)
+   WHERE emp_id = EmpNumIn;
+
+  --Raise an error if either the employee number or
+  --building name is invalid.
+  IF SQL%NOTFOUND THEN
+    RAISE_application_error(-20000,'Employee ' || EmpNumIn
+                           || ' could not be assigned to building '
+                           || BldgNameIn);
+  END IF;
+END;
+/
+
+Procedure created.
+
+BEGIN
+  AssignEmpToBldg (598,'Victor Building');
+  AssignEmpToBldg (597,'East Storage Shed');
+  AssignEmpToBldg (599,'Software Research');
+END;
+/
+

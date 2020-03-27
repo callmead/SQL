@@ -1,0 +1,7 @@
+UPDATE department
+  SET no_of_emps = (SELECT COUNT(*)
+                      FROM emp_dept
+                     WHERE emp_dept.dept_id = department.dept_id);
+3 rows updated.
+COMMIT;
+Commit complete.

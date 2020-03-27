@@ -1,0 +1,34 @@
+SET SERVEROUTPUT ON
+DECLARE
+  bldg_a      building;   --will be less than bldg_b
+  bldg_b      building;
+  bldg_b2     building;
+  bldg_c      building;
+BEGIN
+  --First, create four building objects.
+  bldg_a := building('A Building',null,null);
+  bldg_b := building('Another Building',null,null);
+  bldg_b2 := building('Another Building',null,null);
+  bldg_c := building('Cosmotology Research Lab',null,null);
+
+  --Now compare the building objects and display the results;
+  IF bldg_a < bldg_b THEN
+    dbms_output.put_line('bldg_a < bldg_b');
+  END IF;
+
+  --These two have the same name, so should be equal.
+  IF bldg_b = bldg_b2 THEN
+    dbms_output.put_line('bldg_b = bldg_b2');
+  END IF;
+
+  IF bldg_c > bldg_b2 THEN
+    dbms_output.put_line('bldg_c > bldg_b2');
+  END IF;
+END;
+/
+
+bldg_a < bldg_b
+bldg_b = bldg_b2
+bldg_c > bldg_b2
+
+PL/SQL procedure successfully completed.

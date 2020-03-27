@@ -1,0 +1,14 @@
+CREATE OR REPLACE FUNCTION area_code (phone_number IN VARCHAR2)
+RETURN VARCHAR2 AS
+BEGIN
+  IF phone_number LIKE '___-___-____' THEN
+    --we have a phone number with an area code.
+    RETURN SUBSTR(phone_number,1,3);
+  ELSE
+    --there is no area code
+    RETURN 'none';
+  END IF;
+END;
+/
+utput]Function created.
+SQL>

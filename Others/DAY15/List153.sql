@@ -1,0 +1,2 @@
+CREATE or REPLACE DIRECTORY Books_Dir AS 'C:\BOOKS'
+/

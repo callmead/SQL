@@ -1,0 +1,68 @@
+--A PL/SQL block demonstrating the use of the address object.
+SET SERVEROUTPUT ON
+DECLARE
+  address_1   address;
+  address_2   address;
+  address_3   address;
+BEGIN
+  --Instantiate a new address object named address_1,
+  --and assign a copy of it to address_2.
+  address_1 := address ('2700 Peerless Road','Apt 1',
+                        'Cleveland','TN','37312','4235551212');
+  address_2 := address_1;
+
+  --Change address #1
+  address_1.ChangeAddress ('2800 Peermore Road','Apt 99',
+                           'Detroit','MI','48823');
+
+  --Instantiate a second object.
+  address_3 := address ('2700 Eaton Rapids Road','Lot 98',
+                        'Lansing','MI','48911','5173943551');
+
+  --Now print out the attributes from each object.
+  dbms_output.put_line('Attributes for address_1:');
+  dbms_output.put_line(address_1.getStreet(1));
+  dbms_output.put_line(address_1.getStreet(2));
+  dbms_output.put_line(address_1.getCity
+                       || ' ' || address_1.getStateAbbr
+                       || ' ' || address_1.getPostalCode);
+  dbms_output.put_line(address_1.getPhone);
+
+  dbms_output.put_line('-------------------------');
+  dbms_output.put_line('Attributes for address_2:');
+  dbms_output.put_line(address_2.getStreet(1));
+  dbms_output.put_line(address_2.getStreet(2));
+  dbms_output.put_line(address_2.getCity
+                       || ' ' || address_2.getStateAbbr
+                       || ' ' || address_2.getPostalCode);
+  dbms_output.put_line(address_2.getPhone);
+
+  dbms_output.put_line('-------------------------');
+  dbms_output.put_line('Attributes for address_3:');
+  dbms_output.put_line(address_3.street_1);
+  dbms_output.put_line(address_3.street_2);
+  dbms_output.put_line(address_3.city
+                       || ' ' || address_3.state_abbr
+                       || ' ' || address_3.zip_code);
+  dbms_output.put_line(address_3.phone_number);
+END;
+/
+Attributes for address_1:
+ Peermore Road
+Apt 99
+Detroit MI 48823
+
+-------------------------
+Attributes for address_2:
+ Peerless Road
+Apt 1
+Cleveland TN 37312
+
+-------------------------
+Attributes for address_3:
+ Eaton Rapids Road
+Lot 98
+Lansing MI 48911
+
+
+PL/SQL procedure successfully completed.

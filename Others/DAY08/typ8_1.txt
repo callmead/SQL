@@ -1,0 +1,7 @@
+CREATE OR REPLACE PROCEDURE parts (part_id number, qty number)
+
+AS BEGIN
+UPDATE journal
+set journal.qty = journal.qty + qty
+WHERE journal_id = part_id
+END;

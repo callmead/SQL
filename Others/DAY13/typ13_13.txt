@@ -1,0 +1,3 @@
+ALTER TABLE employee
+  ADD (emp_bldg    REF building);
+

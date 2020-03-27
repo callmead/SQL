@@ -1,0 +1,14 @@
+DECLARE
+     v_MYTEXT VARCHAR2(20) := 'THIS IS A TEST';
+     v_MYCOUNTER INTEGER := 1;
+     v_COUNTNOSP NUMBER := 0;
+BEGIN
+     WHILE v_MYCOUNTER <= LENGTH(v_MYTEXT) LOOP
+          IF SUBSTR(v_MYTEXT,v_MYCOUNTER,1) != ' ' THEN
+               v_COUNTNOSP := v_COUNTNOSP + 1;
+          END IF;
+          v_MYCOUNTER := v_MYCOUNTER + 1;
+     END LOOP;
+     DBMS_OUTPUT.PUT_LINE ('Total count is ' || v_COUNTNOSP);
+END;
+

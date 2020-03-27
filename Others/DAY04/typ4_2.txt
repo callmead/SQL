@@ -1,0 +1,23 @@
+--The negation and identity operators in action.
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  x   NUMBER;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(-242.24);
+  --You can also negate a variable.
+  x := 5;
+  DBMS_OUTPUT.PUT_LINE(-x);
+  --Negating a negative number yields a positive value.
+  x := -5;
+  DBMS_OUTPUT.PUT_LINE(-x);
+  --The identity operator simply returns the value of its operand.
+  DBMS_OUTPUT.PUT_LINE(+10);
+  DBMS_OUTPUT.PUT_LINE(+x);
+END;
+/
+utput]-242.24
+-5
+
+
+-5
+PL/SQL procedure successfully completed.

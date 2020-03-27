@@ -1,0 +1,125 @@
+SQL Class 12 Jan 2004
+
+Views
+-----
+
+==> A view is like a window through which data on database can be viewed or changed.
+==> View has no data of its own.
+
+Advantages
+----------
+
+==> Restricting access to database
+==> Instead of using complex Query to get certain prespective on your data, you can use views.
+
+Syntax:
+-------
+Create 	[or replace] view view_name
+	[column1,column2,...]
+	as
+	select statement;
+
+Example:
+--------
+Create view SalesView
+	as
+	select * from emp where job='SALESMAN';
+-----------------------------------------------
+create view empofdept10
+	as
+	select empno,ename,job from emp where deptno=10;
+--------------------------------------------------------
+
+Now as we have 200 users in an organisation now we will create users and grant them access as
+they should have
+
+	Connect System/manager;
+
+Create 5 users
+
+	create user rashid identified by starbd;
+	create user tariq identified by starbd1;
+	create user khalid identified by starbd2;
+	create user imran identified by starbd3;
+
+As 5 users are created consider they are 200 users of an organisation, now we will give them grants. 
+
+	Grant connect,resource to dept10,khalid,tariq,imran; 
+	this is a head acheq so we will create a domain/Workgroup for them what ever permission 		will be applied on the domain will be on the users of that domain. We cant just write all 	the users names so we will do this way.
+
+	We will create a workgroup
+	--------------------------
+	Create role dept10;
+
+	Now we will add the users to this domain, Put all the user names in this statement,
+	------------------------------------
+	Grant dept10 to rashid,tariq,khalid,imran;
+
+	Now grant rights to this group name, which will allow to all the users of this domain,
+	------------------------------------
+	Grant connect,resource to dept10;
+
+	Now you can add and remove users from this domain like
+	------------------------------------
+	Grant dept10 to newusername;
+
+	To remove the user from this domain,
+	------------------------------------
+	Revoke Domain from User;
+	Revoke dept10 from imran;
+
+	Delete user,
+	-----------------
+	drop user imran;
+
+	To see users of the domain,
+	---------------------------
+	Later on Sir will show later, 
+
+	Now we will give permissions to this domain users from scott user to view data
+	
+	connect scott/tiger;
+
+	Grant select on empofdept10 to dept10;
+	
+	Now connect with ur created user
+	connect imran/starbd3;
+
+	This will not show any tables so see the table from scott user
+	select * from scott.empofdept10;
+
+	Grant createroll to scott;
+========================================================
+Now connect to scott
+	connect scott/tiger;
+	
+	create view dept_summary(name,minsal,maxsal,avgsal)
+	as
+	select dname,min(sal),max(sal),avg(sal)
+	from emp,dept
+	where emp.deptno=dept.deptno
+	Group by dname;
+
+By this code we are creating a summery of emp table, we can make views like this and dont have to write SQL Statement all the time and we can view it by just calling that view
+========================================================
+
+Delete is probihitd if the view contains
+----------------------------------------
+
+==> Join condition
+==> Group function  (eg	select dname,min(sal),max(sal),avg(sal))
+==> Group by clause (eg	Group by dname;)
+==> Distinct command
+
+Update
+------
+
+==> Any of the above
+==> Column defined by expression sal*12
+
+Insert
+------
+
+==> Any of the above
+==> Any not null columns are not selected by view (eg empno)
+=================================================================================================

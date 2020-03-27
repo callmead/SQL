@@ -1,0 +1,32 @@
+set pagesize 22
+set linesize 60
+set feedback off
+ttitle 'Monthly Sales|for June'
+btitle 'Confidential'
+column sales_region heading 'Sales Region' format A15
+column sales_totals heading 'Total Sales' format $99,999,999
+
+SELECT sales_region, sales_totals from master_sales
+WHERE sales_month = '06'
+
+Monthly Sales
+For June
+
+Sales Region       Total Sales
+------------       -----------
+
+North East        $99,204.00
+South East        $72,900.00
+Mid West        $921,892.00
+Plains          $69,916.00
+South West        $98,421.00
+West            $1,027,653.00
+North West        $87,367.00
+
+Confidential
+
+
+column sales_region clear
+column sales_total clear
+ttitle off
+btitle off

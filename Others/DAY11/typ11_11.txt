@@ -1,0 +1,16 @@
+CREATE TABLE emp_pay_history
+  (emp_pay_history_pk   INTEGER,
+   emp_id     INTEGER,
+   as_of      DATE,
+   emp_name   VARCHAR2(32),
+   pay_type   CHAR(1),
+   pay_rate   NUMBER(9,2),
+   constraint emp_pay_history_pk
+      primary key (emp_pay_history_pk)
+  );
+Table created.
+CREATE sequence emp_pay_history_key
+  start with 1
+  increment by 1
+  nocycle;
+Sequence created.

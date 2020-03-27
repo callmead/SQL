@@ -1,0 +1,9 @@
+001010111George         Washington          
+005124745Thomas         Jefferson           
+223445726Richard        Nixon               
+378112475Jimmy          Carter              
+541129744Abraham        Lincoln             
+587145961John           Kennedy             
+665474112Theodore       Roosevelt           
+725139511George         Bush                
+998211247Ronald         Reagan              

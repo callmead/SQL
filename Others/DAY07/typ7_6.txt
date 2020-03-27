@@ -1,0 +1,2 @@
+SELECT TO_DATE('februar-23','MONTH-DD','NLS_DATE_LANGUAGE=german')
+     "Converted" from DUAL;

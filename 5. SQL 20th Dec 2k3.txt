@@ -1,0 +1,68 @@
+Aoa 
+Create table Member first
+
+--------------------------------------
+create table member(
+mid varchar(4),
+mname varchar(40),
+maddress varchar(50),
+mmembershipdate date not null,
+constraint pk_mid primary key (mid))
+/
+--------------------------------------
+
+Then Create Table Author
+
+--------------------------------------
+create table Author(
+Authorid varchar(4),
+AuthorName varchar(40),
+Speciality varchar(100),
+constraint pk_aid primary key (authorid))
+/
+--------------------------------------
+
+Then Create Table BookTitle
+
+--------------------------------------
+
+create table booktitle(
+btitle varchar(20),
+description varchar(100),
+type varchar(20),
+AuthorId varchar(4),
+PublisherName varchar(40),
+constraint pk_bt primary key (btitle),
+constraint fk_aid foreign key (authorid) references author(authorid))
+/
+
+--------------------------------------
+
+Now Create book Table
+
+--------------------------------------
+
+create table book(
+bno varchar(4),
+btitle varchar(20),
+status varchar(15),
+constraint pk_bno primary key (bno),
+constraint fk_bt foreign key (btitle) references booktitle(btitle))
+/
+---------------------------------------
+
+now create finally issue table
+
+---------------------------------------
+
+create table issue(
+mid varchar(4),
+bno varchar(4),
+issuedate date not null,
+returndate date not null,
+constraint fk_bno foreign key (bno) references book(bno),
+constraint fk_mid foreign key (mid) references member(mid),
+constraint pk_mix primary key (mid,bno))
+/
+----------------------------------------
+

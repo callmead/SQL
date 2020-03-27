@@ -1,0 +1,44 @@
+INSERT INTO buildings
+  values (building('Victor Building',
+          address('203 Washington Square',' ','Lansing',
+cc]'MI','48823',' '),
+          597));
+
+ row created.
+
+INSERT INTO buildings
+  values (building('East Storage Shed',
+          address('1400 Abbott Rd','','Lansing','MI','48823',''),
+          598));
+
+ row created.
+
+INSERT INTO buildings
+  values (building('Headquarters Building',
+          address('150 West Jefferson','','Detroit','MI','48226',''),
+          599));
+
+ row created.
+
+SELECT * from buildings;
+
+BLDGNAME
+----------------------------------------
+BLDGADDRESS(STREET_1, STREET_2, CITY, STATE_ABBR, ZIP_CODE, PHONE_NUMBER)
+-------------------------------------------------------------------------
+  BLDGMGR
+---------
+Victor Building
+ADDRESS('203 Washington Square', ' ', 'Lansing', 'MI', '48823', ' ')
+      597
+
+East Storage Shed
+ADDRESS('1400 Abbott Rd', NULL, 'Lansing', 'MI', '48823', NULL)
+      598
+
+Headquarters Building
+ADDRESS('150 West Jefferson', NULL, 'Detroit', 'MI', '48226', NULL)
+      599
+
+COMMIT;
+

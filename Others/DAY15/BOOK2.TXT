@@ -1,0 +1,6 @@
+Title: TEACH YOURSELF DATABASE DEVELOPMENT WITH ORACLE IN 21 DAYS
+Description: Teach Yourself Database Development with Oracle in 21 Days is a tutorial that will teach the reader the basics of developing Oracle database applications. This book focuses on teaching the concepts behind logical and physical database design, a working knowledge of SQL and PL/SQL, and the basics of Developer/2000 and Oracle Power Objects.  These topics are broken out by week below:
+Week One - Relational databases and client/server computing; logical and physical database design; introduction to SQL; using SQL to modify data; and utilizing SQL built-in functions.
+Week Two - Sophisticated SQL queries; overview of PL/SQL; program development with PL/SQL; PL/SQL programming techniques; introduction to Developer/2000 and Oracle Forms; and user interface and application development with Oracle Forms.
+Week Three - Developing reports with Developer/2000 and Oracle Reports; using Oracle Graphics and Procedure Builder in Developer/2000; introduction to Oracle Power Objects; developing an application with OPO; overview of Oracle database security and tuning; and integrating Oracle and the web.
+

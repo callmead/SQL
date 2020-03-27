@@ -1,0 +1,60 @@
+CREATE OR REPLACE package emp_dept_procs AS
+  PROCEDURE init_list;
+  PROCEDURE add_to_list (emp_id IN emp_dept.emp_id%TYPE
+                        ,dept_id IN emp_dept.dept_id%TYPE);
+  FUNCTION get_count RETURN NUMBER;
+  PROCEDURE get_from_list (to_get IN BINARY_INTEGER
+                          ,emp_id OUT emp_dept.emp_id%TYPE
+                          ,dept_id OUT emp_dept.dept_id%TYPE);
+END emp_dept_procs;
+/
+Package created.
+CREATE OR REPLACE package body emp_dept_procs AS
+  --These variables persist throughout a session.
+  listx   BINARY_INTEGER;  --current max index into the list.
+
+  --Declare a record containing the table's primary key.
+  TYPE emp_dept_pk IS RECORD (
+    emp_id  emp_dept.emp_id%TYPE,
+    dept_id emp_dept.dept_id%TYPE);
+
+  --This defines a pl/sql table which will store a list of all records
+  --"touched" by an insert or update statement.
+  TYPE emp_dept_list_type IS TABLE OF emp_dept_pk
+    INDEX BY BINARY_INTEGER;
+
+  --Declare the actual table which will contain our list.
+  emp_dept_list   emp_dept_list_type;
+
+PROCEDURE init_list is
+BEGIN
+  --Initialize the list pointer to zero.
+  listx := 0;
+END;
+
+PROCEDURE add_to_list (emp_id IN emp_dept.emp_id%TYPE
+                      ,dept_id IN emp_dept.dept_id%TYPE) IS
+BEGIN
+  --increment the list index and save the primary key values.
+  listx := listx + 1;
+  emp_dept_list(listx).emp_id := emp_id;
+  emp_dept_list(listx).dept_id := dept_id;
+END;
+
+FUNCTION get_count RETURN NUMBER IS
+BEGIN
+  --return the number of entries in the list.
+  RETURN listx;
+END;
+
+PROCEDURE get_from_list (to_get IN BINARY_INTEGER
+                        ,emp_id OUT emp_dept.emp_id%TYPE
+                        ,dept_id OUT emp_dept.dept_id%TYPE) IS
+BEGIN
+  emp_id := emp_dept_list(to_get).emp_id;
+  dept_id := emp_dept_list(to_get).dept_id;
+END;
+
+END emp_dept_procs;
+/
+Package body created.

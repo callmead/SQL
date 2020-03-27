@@ -1,0 +1,7 @@
+Title: TEACH YOURSELF ORACLE8 IN 21 DAYS
+Description: Teach Yourself Oracle8 in 21 Days is a tutorial that will teach the reader the basics of using and administrating an Oracle database. This book focuses on using concrete examples to explain why things should be done in a certain way. The key topics are broken out by week below:
+Week One - Overview of the Oracle8 Architecture; Network Computing Architecture (NCA); Installing Oracle; Planning the Database; How to Administer Users, and How to Manage Processes.
+Week Two - Administering Logs, Control Files, Datafiles, and Tablespaces; Controlling Rolback Segments; Building Tables and Views; Using Indexes and Clusters; and Security.
+Week Three - Effective Backup Techniques; Recovering the Database; Administering Oracle Replication; Tuning and Optimizing the Database; Administering the Oracle Web Server; and Advanced Oracle Options.
+
+

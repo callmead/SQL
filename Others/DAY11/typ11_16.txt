@@ -1,0 +1,30 @@
+SET ECHO off
+SET MAXDATA 50000
+SET LONG 50000
+SET LONGCHUNKSIZE 1000
+SET PAGESIZE 0
+SET HEADING off
+SET VERIFY off
+ACCEPT trigger_name CHAR PROMPT 'What trigger do you want to see? '
+ACCEPT file_name CHAR PROMPT 'Enter the output filename: '
+SET TERMOUT off
+SET FEEDBACK off
+COLUMN when_clause FORMAT a60 WORD_WRAPPED
+SPOOL &file_name
+SELECT 'CREATE OR REPLACE TRIGGER ' || description
+  FROM USER_TRIGGERS
+ WHERE trigger_name = UPPER('&Trigger_Name');
+SELECT 'WHEN (' || when_clause || ')'  when_clause
+  FROM USER_TRIGGERS
+ WHERE trigger_name = UPPER('&Trigger_Name')
+   AND when_clause IS NOT NULL;
+SELECT trigger_body
+  FROM USER_TRIGGERS
+ WHERE trigger_name = UPPER('&Trigger_Name');
+SELECT '/' FROM dual;
+SPOOL off
+SET TERMOUT on
+SET FEEDBACK on
+SET VERIFY on
+SET HEADING on
+SET PAGESIZE 24

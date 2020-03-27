@@ -1,0 +1,46 @@
+--Insert an employee record and try some updates that should fail.
+--Then try an update that should succeed.
+--Create an employee for testing.
+INSERT INTO employee
+    (emp_id, emp_name, pay_rate, pay_type)
+    VALUES (100,'Kazam el Shabar',100,'H');
+1 row created.
+--Try updating to an invalid pay type.
+UPDATE employee
+    SET pay_type = 'X',
+        pay_rate = 200000
+    WHERE emp_id = 100;
+UPDATE employee
+*
+ERROR at line 1:
+ORA-20000: Invalid combination of pay types: H X
+ORA-06512: at "MY_READER.EMP_PAY_TYPE_CHG", line 34
+ORA-04088: error during execution of trigger 'MY_READER.EMP_PAY_TYPE_CHG'
+--Try an update where we only update the pay type and not the rate.
+UPDATE employee
+    SET pay_type = 'S'
+    WHERE emp_id = 100;
+update employee
+*
+ERROR at line 1:
+ORA-20000: The pay type changed and the pay rate did not.
+ORA-06512: at "MY_READER.EMP_PAY_TYPE_CHG", line 10
+ORA-04088: error during execution of trigger 'MY_READER.EMP_PAY_TYPE_CHG'
+--Update both type and rate, but the new  yearly rate is
+--more than 20% greater or less than the previous rate.
+UPDATE employee
+    SET pay_type = 'S',
+        pay_rate = 300000
+    WHERE emp_id = 100;
+update employee
+*
+ERROR at line 1:
+ORA-20000: New salary is not within 20% of the old rate.
+ORA-06512: at "MY_READER.EMP_PAY_TYPE_CHG", line 20
+ORA-04088: error during execution of trigger 'MY_READER.EMP_PAY_TYPE_CHG'
+--Update both type and rate, this time the new value is within range.
+UPDATE employee
+    SET pay_type = 'S',
+        pay_rate = 240000
+    WHERE emp_id = 100;
+1 row updated.

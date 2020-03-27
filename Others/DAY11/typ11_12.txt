@@ -1,0 +1,27 @@
+CREATE OR REPLACE TRIGGER maintain_pay_history
+  AFTER INSERT OR UPDATE OR DELETE ON employee
+  FOR EACH ROW
+  WHEN ((new.pay_rate <> old.pay_rate)
+    OR  (new.pay_rate IS NULL AND old.pay_rate IS NOT NULL)
+    OR  (new.pay_rate IS NOT NULL AND old.pay_rate IS NULL)
+    OR  (new.pay_type <> old.pay_type)
+    OR  (new.pay_type IS NULL AND old.pay_type IS NOT NULL)
+    OR  (new.pay_type IS NOT NULL AND old.pay_type IS NULL)
+    )
+DECLARE
+  log_sequence_num    INTEGER;
+BEGIN
+  --Get the next value from the sequence. This can only
+  --be done by using a SELECT statement.
+  SELECT emp_pay_history_key.NEXTVAL INTO log_sequence_num FROM dual;
+
+  --Log this change in the history table
+  INSERT INTO emp_pay_history
+    (emp_pay_history_pk, emp_id, as_of, emp_name, pay_type, pay_rate)
+    VALUES (log_sequence_num
+           ,NVL(:NEW.emp_id,:OLD.emp_id), SYSDATE
+           ,NVL(:NEW.emp_name,:OLD.emp_name)
+           ,:NEW.pay_type, :NEW.pay_rate);
+END;
+/
+Trigger created.

@@ -1,0 +1,10 @@
+CREATE OR REPLACE TRIGGER my_table_set_key
+        BEFORE INSERT ON my_table
+        REFERENCING NEW AS n
+        FOR EACH ROW
+DECLARE
+  new_key INTEGER;
+BEGIN
+  SELECT key_for_table.NEXTVAL INTO new_key FROM DUAL;
+  :n.fld_pk := new_key;
+END;

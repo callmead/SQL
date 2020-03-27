@@ -1,0 +1,87 @@
+CREATE OR REPLACE TYPE address AS OBJECT (
+  street_1      VARCHAR2(40),
+  street_2      VARCHAR2(40),
+  city          VARCHAR2(40),
+  state_abbr    VARCHAR2(2),
+  zip_code      VARCHAR2(5),
+  phone_number  VARCHAR2(10),
+  MEMBER PROCEDURE ChangeAddress (
+    st_1 IN VARCHAR2, st_2 IN VARCHAR2, cty IN VARCHAR2,
+    state IN VARCHAR2, zip IN VARCHAR2),
+  MEMBER FUNCTION getStreet (line_no IN number) RETURN VARCHAR2,
+  MEMBER FUNCTION getCity RETURN VARCHAR2,
+  MEMBER FUNCTION getStateAbbr RETURN VARCHAR2,
+  MEMBER FUNCTION getPostalCode RETURN VARCHAR2,
+  MEMBER FUNCTION getPhone RETURN VARCHAR2,
+  MEMBER PROCEDURE setPhone (newPhone IN VARCHAR2)
+);
+
+Type created.
+
+CREATE OR REPLACE TYPE BODY address AS
+  MEMBER PROCEDURE ChangeAddress (
+    st_1 IN VARCHAR2, st_2 IN VARCHAR2, cty IN VARCHAR2,
+    state IN VARCHAR2, zip IN VARCHAR2) IS
+  BEGIN
+    IF (st_1 IS NULL) OR (cty IS NULL) OR 
+cc](state IS NULL) OR (zip IS NULL)
+       OR (upper(state) NOT IN ('AK','AL','AR','AZ','CA','CO',
+                                'CT','DC','DE','FL','GA','HI',
+                                'IA','ID','IL','IN','KS','KY',
+                                'LA','MA','MD','ME','MI','MN',
+                                'MO','MS','MT','NC','ND','NE',
+                                'NH','NJ','NM','NV','NY','OH',
+                                'OK','OR','PA','RI','SC','SD',
+                                'TN','TX','UT','VA','VT','WA'
+                                'WI','WV','WY'))
+OR (zip <> ltrim(to_char(to_number(zip),'09999'))) THEN
+     RAISE_application_error(-20001,'The new Address is invalid.');
+    ELSE
+      street_1 := st_1;
+      street_2 := st_2;
+      city := cty;
+      state_abbr := upper(state);
+      zip_code := zip;
+    END IF;
+  END;
+
+  MEMBER FUNCTION getStreet (line_no IN number)
+    RETURN VARCHAR2 IS
+  BEGIN
+    IF line_no = 1 THEN
+      RETURN street_1;
+    ELSIF line_no = 2 THEN
+      RETURN street_2;
+    ELSE
+      RETURN ' ';    --send back a blank.
+    END IF;
+  END;
+
+  MEMBER FUNCTION getCity RETURN VARCHAR2 IS
+  BEGIN
+    RETURN city;
+  END;
+
+  MEMBER FUNCTION getStateAbbr RETURN VARCHAR2 IS
+  BEGIN
+    RETURN state_abbr;
+  END;
+
+  MEMBER FUNCTION getPostalCode RETURN VARCHAR2 IS
+  BEGIN
+    RETURN zip_code;
+  END;
+
+  MEMBER FUNCTION getPhone RETURN VARCHAR2 IS
+  BEGIN
+    RETURN phone_number;
+  END;
+
+  MEMBER PROCEDURE setPhone (newPhone IN VARCHAR2) IS
+  BEGIN
+    phone_number := newPhone;
+  END;
+END;
+/
+
+Type body created.

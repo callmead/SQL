@@ -1,0 +1,29 @@
+DECLARE               -- insert department data first
+i_dept_id  INTEGER,
+i_dept_name,
+BEGIN
+INSERT into department values
+(&i_dept_id,'&dept_name');
+END;
+
+COMMIT;            -- save the department data
+
+DECLARE             -- insert employee and emp_dept data
+i_id   INTEGER;
+e_id  INTEGER;
+i_name  VARCHAR2(32);
+i_super  INTEGER;
+i_rate    NUMBER(9,2);
+i_type   CHAR;
+i_emp_dept INTEGER;
+e_emp_dept INTEGER;
+BEGIN
+e_id:=&employee_id;
+e_emp_dept:=&employee_department_id;
+
+INSERT into employee values
+(e_id, '&i_name',&i_super,&i_rate,'&i_type',e_emp_dept);
+INSERT into emp_dept values (e_id,e_emp_dept);
+END;
+
+COMMIT;         -- save employee  and emp_dept datadata

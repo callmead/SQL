@@ -1,0 +1,44 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  --all these declarations are identical.
+  num_dec     DECIMAL(5,2);
+  num_int     INTEGER(5,2);
+  num_dbl     DOUBLE PRECISION(5,2);
+  num_num     NUMERIC(5,2);
+  num_real    REAL(5,2);
+  num_sint    SMALLINT(5,2);
+
+  --decimal precision / 0.30103 = binary precision,
+  --so 5/.30103 = 16.6. Round it up to 17.
+  num_flt     FLOAT(17);
+
+ BEGIN
+  --Assign the same value to each variable, and make it one
+  --that needs to be rounded.
+  num_dec := 123.456;
+  num_int := 123.456;
+  num_dbl := 123.456;
+  num_num := 123.456;
+  num_real := 123.456;
+  num_sint := 123.456;
+  num_flt := 123.456;
+
+  --Now display each value to demonstrate that they are all the same.
+  DBMS_OUTPUT.PUT_LINE(num_dec);
+  DBMS_OUTPUT.PUT_LINE(num_int);
+  DBMS_OUTPUT.PUT_LINE(num_dbl);
+  DBMS_OUTPUT.PUT_LINE(num_num);
+  DBMS_OUTPUT.PUT_LINE(num_real);
+  DBMS_OUTPUT.PUT_LINE(num_sint);
+  DBMS_OUTPUT.PUT_LINE(num_flt);
+END;
+/
+123.46
+123.46
+123.46
+123.46
+123.46
+123.46
+123.456
+
+PL/SQL procedure successfully completed.

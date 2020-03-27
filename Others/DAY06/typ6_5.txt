@@ -1,0 +1,11 @@
+DECLARE
+     v_Emergency_Warning VARCHAR2(50);
+     v_Status NUMBER = 0;
+     v_ReactorStatus VARCHAR2(10);
+BEGIN
+     <<Emergency_Check>>
+          PANIC();
+EXCEPTION
+     WHEN e_TOOHOT THEN
+          GOTO Emergency_Check;
+ END;

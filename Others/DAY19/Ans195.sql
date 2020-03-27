@@ -1,0 +1,3 @@
+BEGIN
+     DBMS_JOB.REMOVE(200);
+END;

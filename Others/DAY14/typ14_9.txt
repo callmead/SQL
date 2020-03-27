@@ -1,0 +1,21 @@
+CREATE OR REPLACE FUNCTION RAISE(
+          p1 INTEGER,
+          p2 NUMBER)
+     RETURN NUMBER IS
+     p3 NUMBER;
+BEGIN
+     IF p1 = 1 THEN
+          p3 := p2 * 1.10;
+     ELSIF p1 = 2 THEN
+          p3 := p2 * 1.05;
+     ELSIF p1 = 3 THEN
+          p3 := p2 * 1.04;
+     ELSIF p1 = 4 THEN
+          p3 := p2 * 1.03;
+ELSIF p1 = 5 THEN
+          p3 := p2 ;
+     ELSE
+          p3 := p2 * 1.02;
+     END IF;
+     RETURN p3; --
+END RAISE;

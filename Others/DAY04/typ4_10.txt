@@ -1,0 +1,35 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  d1    DATE;
+  cd1   VARCHAR2(10);
+  cd2   VARCHAR2(10);
+  n1    NUMBER;
+  cn1   VARCHAR2(10);
+  cn2   VARCHAR2(10);
+BEGIN
+  --Assign a value to this string which represents a date.
+  cd1 := '15-Nov-61';
+  --Now assign the string to a date variable.
+  --The conversion is implicit.
+  d1 := cd1;
+  --Now assign that date variable to another string.
+   --Again the conversion
+  --is implicit, but this time the conversion is
+   --from a date to a string.
+  cd2 := d1;
+  --Display the two character strings to show that they are the same.
+  DBMS_OUTPUT.PUT_LINE('CD1 = ' || cd1);
+  DBMS_OUTPUT.PUT_LINE('CD2 = ' || cd2);
+  --Repeat the same example as above, but with numbers.
+  cn1 := '995';
+  n1 := cn1 + .99 ;
+  cn2 := n1;
+  DBMS_OUTPUT.PUT_LINE('CN1 = ' || cn1);
+  DBMS_OUTPUT.PUT_LINE('CN2 = ' || cn2);
+END;
+/
+utput]CD1 = 15-Nov-61
+CD2 = 15-NOV-61
+CN1 = 995
+CN2 = 995.99
+PL/SQL procedure successfully completed.

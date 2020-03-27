@@ -1,0 +1,6 @@
+BEGIN
+     LOOP
+          NULL;
+          EXIT;
+     END LOOP;
+END;

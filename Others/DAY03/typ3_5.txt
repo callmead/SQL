@@ -1,0 +1,14 @@
+FUNCTION iifn(boolean_expression in BOOLEAN,
+              true_number IN NUMBER,
+              false_number IN NUMBER)
+RETURN NUMBER IS
+BEGIN
+  IF boolean_expression THEN
+    RETURN true_number;
+  ELSIF NOT boolean_expression THEN
+    RETURN false_number;
+  ELSE
+    --nulls propagate, i.e. null input yields null output.
+    RETURN NULL;
+  END IF;
+END;

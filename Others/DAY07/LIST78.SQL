@@ -1,0 +1,2 @@
+select TO_CHAR(SYSDATE,'MONTH DDTH YYYY') "Today" from DUAL
+

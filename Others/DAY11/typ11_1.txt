@@ -1,0 +1,11 @@
+CREATE OR REPLACE TRIGGER department_insert_update
+  BEFORE INSERT OR UPDATE ON department
+  FOR EACH ROW
+DECLARE
+  dup_flag  INTEGER;
+BEGIN
+  --Force all department names to uppercase.
+:NEW.dept_name := UPPER(:NEW.dept_name);
+END;
+/
+Trigger created.

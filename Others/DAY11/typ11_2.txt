@@ -1,0 +1,11 @@
+INSERT INTO department (dept_id, dept_name) VALUES (10,'payroll');
+1 row created.
+INSERT INTO department (dept_id, dept_name) VALUES (11,'Sewage');
+1 row created.
+UPDATE department SET dept_name = 'Payroll' WHERE dept_id = 10;
+1 row updated.
+SELECT dept_id, dept_name FROM department WHERE dept_id BETWEEN 10 AND 11;
+  DEPT_ID DEPT_NAME
+--------- --------------------------------
+       10 PAYROLL
+       11 SEWAGE

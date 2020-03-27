@@ -1,0 +1,64 @@
+SQL Class 21/10/03
+
+User Name Scott
+Password tiger
+
+1) To see all tables in scott database
+
+select * from tab;
+
+2) To see table's Design
+
+Describe tablename;
+Describe emp;
+
+3) To view selected columns in a table
+
+select empno,ename,sal from emp;
+
+you can edit your errors in ed, just type ed and press enter then a notepad editor will come by
+which you can edit last executed code, and there is no ; at the end in the ed just /
+
+If you want to copy a code from somwhere top or middle from oracle interface then select text
+by keeping left click pressed (drag) and press right click without letting leftclick go.
+
+4) Ascending Order
+
+select ename,sal from emp order by sal;
+select ename,sal from emp order by sal desc;
+select ename,sal from emp order by sal asc;
+
+5) select * from emp where empno=7788;
+   select ename from emp where empno=7788;
+
+6) select * from emp where job='MANAGER' and job='ANALYST';
+   select * from emp where job='MANAGER' or job='ANALYST';
+
+7) select * from emp where sal >3000;
+   select * from emp where sal >=3000;
+   select * from emp where sal >3000 and Job='MANAGER';
+   select * from emp where sal >3000 or Job='MANAGER' or deptno=20;
+
+8) select ename,sal,comm from emp
+   where Job='MANAGER' or Job='ANALYST' or Job='SALES';
+
+   or you can write the below code both are same
+
+   select ename,sal,comm from emp
+   where job in ('MANAGER','ANALYST','SALESMAN');
+
+=====================================================================
+
+GROUP FUNCTIONS
+---------------
+
+select count(*) from emp;
+select count(comm) from emp;
+select sum(sal) from emp;
+select sum(sal) from emp where job='ANALYST';
+select avg(sal) from emp;
+select min(sal) from emp; minimum value
+select max(sal) from emp;
+
+=====================================================================
+

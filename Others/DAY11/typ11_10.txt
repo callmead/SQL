@@ -1,0 +1,12 @@
+--Establish what time it is.
+SELECT TO_CHAR(SYSDATE,'hh24:mm') FROM dual;
+TO_CHAR(SYSDATE,'HH24:MM')
+---------------------------
+21:06
+UPDATE employee SET pay_rate = 500000 WHERE emp_id = 103;
+*
+ERROR at line 1:
+ORA-20000: Employee changes only allowed during business hours.
+ORA-06512: at "MY_READER.ONLY_DURING_BUSINESS_HOURS", line 5
+ORA-04088: error during execution of trigger
+cc] 'MY_READER.ONLY_DURING_BUSINESS_HOURS'

@@ -1,0 +1,46 @@
+CREATE OR REPLACE TRIGGER emp_pay_type_chg
+BEFORE UPDATE ON employee
+FOR EACH ROW WHEN (OLD.pay_type <> NEW.pay_type)
+DECLARE
+  new_yearly_rate       employee.pay_rate%TYPE;
+  old_yearly_rate       employee.pay_rate%TYPE;
+  allowed_variance_amt  employee.pay_rate%TYPE;
+  allowed_variance_pct  NUMBER(2,2) := .20;
+  hours_in_year         INTEGER := 2000;
+BEGIN
+  --Check to see if the pay rate has also been changed.
+IF :OLD.pay_rate = :NEW.pay_rate THEN
+    RAISE_APPLICATION_ERROR (-20000,
+cc]'The pay type changed and the pay rate did not.');
+END IF;
+
+  --Check to verify that the new expected yearly rate is within
+  --plus-or-minus 20% of the previous yearly rate.
+  IF :OLD.pay_type = 'H' AND :NEW.pay_type = 'S' THEN
+--the new salary must be + or - 20% of the old hourly rate * 2000 hours.
+old_yearly_rate := ROUND(:OLD.pay_rate * hours_in_year,2);
+    new_yearly_rate := :NEW.pay_rate;
+    allowed_variance_amt := allowed_variance_pct * old_yearly_rate;
+ IF ABS(new_yearly_rate - old_yearly_rate) > allowed_variance_amt THEN
+      RAISE_APPLICATION_ERROR (-20000,'New salary is not within '
+        || TO_CHAR(allowed_variance_pct * 100) || '% of the old rate.');
+    END IF;
+  ELSIF :OLD.pay_type = 'S' AND :NEW.pay_type = 'H' THEN
+--the new hourly rate * 2000 hours must be + or - 20% of the old salary.
+new_yearly_rate := ROUND(:NEW.pay_rate * hours_in_year,2);
+    old_yearly_rate := :OLD.pay_rate;
+    allowed_variance_amt := allowed_variance_pct
+cc] * (old_yearly_rate * hours_in_year);
+IF ABS(new_yearly_rate - old_yearly_rate) > allowed_variance_amt THEN
+      RAISE_APPLICATION_ERROR (-20000,
+cc]'New project yearly rate is not within '
+|| TO_CHAR(allowed_variance_pct * 100) || '% of the old salary.');
+    END IF;
+  ELSE
+    --Something is very wrong if we ever get here.
+    RAISE_APPLICATION_ERROR(-20000,'Invalid combination of pay types: '
+                            || :OLD.pay_type || ' ' || :NEW.pay_type);
+  END IF;
+END;
+/
+Trigger created.

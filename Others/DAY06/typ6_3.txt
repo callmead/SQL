@@ -1,0 +1,11 @@
+DECLARE
+     v_Emergency_Warning VARCHAR2(50);
+     v_Status NUMBER = 0;
+     v_ReactorStatus VARCHAR2(10);
+BEGIN
+     GOTO Emergency_Check;
+     IF v_ReactorStatus = 'Very Hot' THEN
+          <<Emergency_Check>>
+               PANIC();
+     END-IF;
+ END;

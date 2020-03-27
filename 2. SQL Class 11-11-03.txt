@@ -1,0 +1,44 @@
+SQL Class 11-11-03
+
+Insert Update and Delete
+========================
+
+Insert
+======
+
+1) To insert record in table there are 2 ways 1st one is below
+
+ insert into emp values(7935,'RALF','CLERK',null,'23-feb-03'2000,null,10,'a@usa.net');
+
+For this method, you must enter every field's data its must otherwise error will generate
+
+2) If you want to enter data in some specific fields then see below
+
+ insert into friend (Name,address,DOB,Email)
+ values('Shabi','H.No 26A','3-Mar-1982','shabi@shabi.com');
+
+
+Update
+======
+
+Update means Editing data in a table see how;
+
+update emp set ColumnName = Value, ColumnName = NewValue;
+update emp set ename='BILL' where empno=7902;
+
+
+Delete
+======
+
+Deleting means deleting record set from database;
+
+ delete from emp where wmpno=7902;
+
+If you want to delete all records from table then;
+ 
+ delete from TableName;
+ delete from Customers;
+
+If you want to delete the table as well then;
+ 
+ drop table customers;

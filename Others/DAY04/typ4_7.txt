@@ -1,0 +1,61 @@
+--Remember to execute: SET SERVEROUTPUT ON
+DECLARE
+  fixed_length_10  CHAR(10);
+  fixed_length_20  CHAR(20);
+  var_length_10    VARCHAR2(10);
+  var_length_20    VARCHAR2(20);
+BEGIN
+  --Constants are compared using blank-padded comparison semantics,
+  --so the trailing spaces won't affect the result.
+  IF 'Jonathan' = 'Jonathan          ' THEN
+    DBMS_OUTPUT.PUT_LINE
+    ('Constant: ''jonathan'' = ''Jonathan          ''');
+  END IF;
+  --Fixed length strings are also compared with blank-padded
+  --comparison semantic, so the fact that one is longer doesn't matter.
+  fixed_length_10 := 'Donna';
+  fixed_length_20 := 'Donna';
+  IF fixed_length_20 = fixed_length_10 THEN
+    DBMS_OUTPUT.PUT_LINE('Char: ''' || fixed_length_10 || ''' =
+                              [ic:ccc]''' || fixed_length_20 || '''');
+  END IF;
+  --Comparison of a fixed length string and a literal also
+  --results is the use of blank-padded comparison semantics.
+   IF fixed_length_10 = 'Donna' THEN
+    DBMS_OUTPUT.PUT_LINE('Char and constant: '''
+     || fixed_length_10 || ''' = ''' || 'Donna' || '''');
+  END IF;
+  --But compare a variable length string
+   --against a fixed length, and the
+  --trailing spaces do matter.
+  var_length_10 := 'Donna';
+  IF fixed_length_10 = var_length_10 THEN
+    DBMS_OUTPUT.PUT_LINE('Char and Varchar2: '''
+      || fixed_length_10 || ''' = '''
+      || var_length_10 || '''');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Char and Varchar2: '''
+     || fixed_length_10 || ''' NOT = '''
+     || var_length_10 || '''');
+  END IF;
+  --The maximum lengths of varchar2 strings do not matter,
+  --only the assigned values.
+  var_length_10 := 'Donna';
+  var_length_20 := 'Donna';
+  IF var_length_20 = var_length_10 THEN
+    DBMS_OUTPUT.PUT_LINE('Both Varchar2: '''
+     || var_length_20 || ''' = '''
+     || var_length_10 || '''');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Both Varchar2: '''
+      || var_length_20 || ''' NOT = '''
+      || var_length_10 || '''');
+  END IF;
+END;
+/
+utput]Constant: 'jonathan' = 'Jonathan          '
+Char: 'Donna     ' = 'Donna               '
+Char and constant: 'Donna     ' = 'Donna'
+Char and Varchar2: 'Donna     ' NOT = 'Donna'
+Both Varchar2: 'Donna' = 'Donna'
+PL/SQL procedure successfully completed.

@@ -1,0 +1,9 @@
+SHOW ERRORS
+Errors for FUNCTION SS_THRESH:
+
+LINE/COL ERROR
+-------- ---------------------------------------------------------------
+5/5      PLS-00103: Encountered the symbol "=" when expecting one of the
+         following:
+         := . ( @ % ;
+         The symbol ":= was inserted before "=" to continue.

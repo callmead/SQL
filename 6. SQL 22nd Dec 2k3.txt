@@ -1,0 +1,119 @@
+SQL CLASS 22th December 2003
+
+Droping Table
+=============
+Syntax
+Drop table tanlename
+
+Code
+Drop table customer
+
+This will delete table structure, and the data as well. But if there is another master table connected to this table then it will not allow to delete the table.
+------------------------------------------------------
+
+Drop table customer cascade
+
+This will delete the master table costomer and all its child tables.
+------------------------------------------------------
+
+Truncate Table
+--------------
+Delete all the records from table, there is no way to retreive data again
+
+Trauncate table customer
+------------------------------------------------------
+
+Delete Table
+------------
+Delete table will also delete records from table but ther is a way to retreive data.
+------------------------------------------------------
+
+Renaming Table
+--------------
+Rename table customer to customerinfo
+------------------------------------------------------
+
+
+========================================================
+Scott tiger is just a user and system is the dba
+
+Login as dba using the following command as dba
+
+connect system/manager;
+
+To create a new user we login as dba, system/manager and create users, and change password 
+
+To Change password.
+Alter user system identified by newPassword;
+------------------------------------------------------
+To create a new user login as system and use the folowing syntax
+
+Syntax
+Create user username identified by password;
+
+code
+create user Adeel identified by malik;
+
+To make this user able to login grant connect permission then you will be able to login SQL.
+
+Syntax
+Grant connect to UserName;
+
+Code
+Grant connect to adeel;
+
+Now u will not be able to create any tables for that also u need a privilage to create tables.
+
+To see tables of scott user, connect scott and give permission to your user to see scott's employee table which will be read only. see code
+
+Grant select on emp to adeel; 
+this will beRead only
+
+Grant select,update,delete on emp to adeel;
+Also u can give this.
+
+Now login ur user and use the following syntax to see the scott user's emp table
+
+select * from scott.emp;
+
+By ur user you can insert update and delete records only you can not drop scott's table from ur user. Only scott or system user can delete.
+
+Now to grant user to create tables in his user
+
+Grant resource to Adeel;
+
+The following user will be make a user dba
+grant dba to adeel;
+
+Writig all the permission together
+Grant connect,select,resource to adeel
+------------------------------------------------------
+
+After dab you are everything;
+=======================================================
+
+Changing table's Structure is called Alter see example
+
+Syntax
+Alter table TableName
+	Add(ColumnName Type);
+Code
+Alter table member
+	Add(Email varchar(30));
+This will add Email column in table member
+
+-------------------------------------------------------
+Now if you want to set this column as not null then you will not be able to do that because there is no value at this time in the column so use a dummy value to be inserted in the column's records 
+
+update member set email=abc;
+This will add values abc to every record in column email now make it not null
+
+Alter table member
+	modify(email varchar(30) not null);
+
+To change existing column's structure by using modify.
+To change data type if the column is null then you can do that without any problem otherwise there will be a problem. If you want to increse the column's size then ther will be no problem but in decrease the size, you can only do that if the column is null.
+
+Alter table member
+	modify(email varchar(10) not null);
+-------------------------------------------------------

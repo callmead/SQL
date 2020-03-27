@@ -1,0 +1,39 @@
+--Demonstration of a nested procedure block.
+--Be sure you have executed: SET SERVEROUTPUT ON
+--This is a PL/SQL wrapper that executes the
+--procedure shown in listing 3.6.
+DECLARE
+  first_number    NUMBER;
+  second_number   NUMBER;
+
+  PROCEDURE swapn (num_one IN OUT NUMBER, num_two IN OUT NUMBER) IS
+    temp_num    NUMBER;
+  BEGIN
+    temp_num := num_one;
+    num_one := num_two;
+    num_two := temp_num ;
+  END;
+
+BEGIN
+  --Set some initial values, and display them.
+  first_number := 10;
+  second_number := 20;
+  DBMS_OUTPUT.PUT_LINE('First Number = ' || TO_CHAR (first_number));
+  DBMS_OUTPUT.PUT_LINE('Second Number = ' || TO_CHAR (second_number));
+
+  --Swap the values
+  DBMS_OUTPUT.PUT_LINE('Swapping the two values now.');
+  swapn(first_number, second_number);
+
+  --Display the results
+  DBMS_OUTPUT.PUT_LINE('First Number = ' || to_CHAR (first_number));
+  DBMS_OUTPUT.PUT_LINE('Second Number = ' || to_CHAR (second_number));
+END;
+/
+First Number = 10
+Second Number = 20
+Swapping the two values now.
+First Number = 20
+Second Number = 10
+
+PL/SQL procedure successfully completed.

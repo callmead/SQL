@@ -1,0 +1,12 @@
+BEGIN
+     FOR year = 1995 to 1997
+     LOOP
+          FOR day = 1 to 31
+          LOOP
+               FOR month = 1 to 12
+               LOOP
+                    <statement(s)>
+               END LOOP; --end month
+          END LOOP; --end day
+     END LOOP; --end year
+END;

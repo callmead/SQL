@@ -1,0 +1,11 @@
+DECLARE
+CURSOR c_employees is
+      SELECT * from employees
+      WHERE pay_type = 'H';
+
+BEGIN                                        -- implicit cursor open
+  FOR emp_record  in c_employees loop        -- implicit cursor fetch
+       process_monthly_hourly_checks
+ END LOOP;                                   -- implicit cursor close
+ COMMIT;
+END;

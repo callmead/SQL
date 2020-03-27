@@ -1,0 +1,17 @@
+--For the first update, treat buildings as a traditional table.
+ UPDATE buildings
+   SET BldgName = 'Software Research'
+   WHERE BldgName = 'Headquarters Building';
+
+ row updated.
+
+ --This update calls the constructor in the SET clause.
+ UPDATE buildings b
+    SET b = building(BldgName,BldgAddress,598)
+  WHERE BldgName = 'Victor Building';
+
+ row updated.
+
+COMMIT;
+
+Commit complete.

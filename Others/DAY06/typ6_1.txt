@@ -1,0 +1,12 @@
+DECLARE
+     v_Emergency_Warning VARCHAR2(50);
+     v_Status NUMBER = 0;
+BEGIN
+     GOTO Emergency_Check;
+     BEGIN
+          <<Emergency_Check>>
+               IF v_Status = 1 THEN
+                   PANIC();
+               END-IF;
+     END;
+END;

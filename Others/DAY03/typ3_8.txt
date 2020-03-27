@@ -1,0 +1,49 @@
+--Be sure to execute: SET SERVEROUTPUT ON
+--before executing this PL/SQL block.
+--This is an example of nested anonymous blocks.
+DECLARE
+  error_flag  BOOLEAN := false;  --true if an error occurs while counting.
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('We are going to count from 100 to 1000.');
+
+  --Execute the nested block to do the actual counting.
+  --Any errors will be trapped within this block.
+  DECLARE
+    hundreds_counter  NUMBER(1,-2);
+  BEGIN
+    hundreds_counter := 100;
+    LOOP
+      DBMS_OUTPUT.PUT_LINE(hundreds_counter);
+      hundreds_counter := hundreds_counter + 100;
+      IF hundreds_counter > 1000 THEN
+        EXIT;
+      END IF;
+     END LOOP;
+  EXCEPTION
+  WHEN OTHERS THEN
+    --set the error flag if we can't finish counting.
+    error_flag := true;
+  END;
+
+  --We are done. Were we successful?
+  IF error_flag THEN
+    DBMS_OUTPUT.PUT_LINE('Sorry, I cannot count that high.');
+   ELSE
+    DBMS_OUTPUT.PUT_LINE('Done.');
+  END IF;
+END;
+/
+ We are going to count from 100 to 1000.
+100
+200
+300
+400
+500
+600
+700
+800
+900
+Sorry, I cannot count that high.
+
+PL/SQL procedure successfully completed.

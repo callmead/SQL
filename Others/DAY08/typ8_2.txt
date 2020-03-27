@@ -1,0 +1,7 @@
+CREATE PROCEDURE parts (part_id number, qty number)
+AS BEGIN
+UPDATE journal;
+PUT_LINE ('Original Qty =' || journal.qty);      -- debug Line
+set journal.qty = journal.qty + qty
+WHERE journal_id = part_id;
+PUT_LINE ('New Qty =' || journal.qty);           -- debug Line

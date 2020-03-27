@@ -1,0 +1,6 @@
+CREATE OR REPLACE FUNCTION mypi
+    RETURN NUMBER IS
+BEGIN
+     NULL;
+     RETURN 3.14;
+END mypi; --end of mypi function

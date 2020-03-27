@@ -1,0 +1,10 @@
+CREATE OR REPLACE PACKAGE DEBUG AS
+     PROCEDURE OUT(p_Comments IN VARCHAR2, p_Variable IN VARCHAR2);
+/* Procedure OUT is used to output a comment of your
+   choice, along with the contents of the variable.  The
+   Procedure OUT statement defines the format of the function */
+     PROCEDURE Erase;
+/* Procedure Erase is used to erase the contents of the file.
+   Used to start a new debugging process.  Good idea to call
+   this function first.  */
+END DEBUG; -- End Definition of package DEBUG

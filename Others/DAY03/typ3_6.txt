@@ -1,0 +1,7 @@
+PROCEDURE swapn (num_one IN OUT NUMBER, num_two IN OUT NUMBER) IS
+    temp_num    NUMBER;
+  BEGIN
+    temp_num := num_one;
+    num_one := num_two;
+    num_two := temp_num ;
+  END;

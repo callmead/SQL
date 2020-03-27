@@ -1,0 +1,35 @@
+CREATE or REPLACE TRIGGER security
+
+/* This trigger package will send an alert called emp_change when
+   a row has been inserted, deleted, or updated. It will also send
+   a message with the old Employee ID, the New Employee ID, the old
+   Pay Rate and the new Pay Rate  */
+
+BEFORE INSERT OR UPDATE OR DELETE ON employee
+FOR EACH ROW
+BEGIN
+
+/* Send the Alert emp_change with the old and new values from the
+   row being updated, changed, or deleted. Notice the use of :OLD
+   for the contents of the original data and :NEW for the contents
+   of the new data  */
+
+     DBMS_ALERT.SIGNAL('emp_change','NOTICE:  OLD ID: ' || :OLD.emp_id
+          || ' NEW ID: ' || :NEW.emp_id || ' OLD Pay Rate: '
+          || :OLD.pay_rate || ' NEW Pay Rate:  ' || :NEW.pay_rate);
+
+/* Insert all of the values into the security table */
+     INSERT INTO security
+          (OLD_emp_id,OLD_emp_name,OLD_supervised_by,
+           OLD_pay_rate,OLD_pay_type,OLD_emp_dept_id,
+           NEW_emp_id,NEW_emp_name,NEW_supervised_by,
+           NEW_pay_rate,NEW_pay_type,NEW_emp_dept_id,
+           verified,changed_by,time_changed)
+     VALUES
+          (:OLD.emp_id,:OLD.emp_name,:OLD.supervised_by,
+           :OLD.pay_rate,:OLD.pay_type,:OLD.emp_dept_id,
+           :NEW.emp_id,:NEW.emp_name,:NEW.supervised_by,
+           :NEW.pay_rate,:NEW.pay_type,:NEW.emp_dept_id,
+           'N',USER,SYSDATE);
+
+END security; -- End of the Trigger Security

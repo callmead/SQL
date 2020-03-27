@@ -1,0 +1,10 @@
+SELECT BldgName
+  FROM buildings
+
+ORDER BY BldgName;
+
+BLDGNAME
+----------------------------------------
+East Storage Shed
+Headquarters Building
+Victor Building
